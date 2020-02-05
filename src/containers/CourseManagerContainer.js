@@ -76,6 +76,7 @@ class CourseManagerContainer extends React.Component {
     render() {
         return(
             <div>
+
                 <h1>Course Manager</h1>
 
                 {
