@@ -4,7 +4,6 @@ import {updateCourse} from "../services/CourseService";
 
 const CourseTableComponent = ({courses, deleteCourse, showEditor}) =>
     <div>
-
         <h4>Dear Student, you have {courses.length} courses in your list.</h4>
         <table class = 'table'>
             <thead class = 'thead-dark'>

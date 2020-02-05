@@ -41,6 +41,7 @@ class CourseManagerContainer extends React.Component {
 
     }
 
+
     addCourse = async () =>{
         await createCourse({
             title: this.state.newCourseTitle
@@ -95,7 +96,10 @@ class CourseManagerContainer extends React.Component {
                         {
                             this.state.layout === 'grid'
                             && <CourseGridComponent
-                                courses={this.state.courses}/>
+                                courses={this.state.courses}
+                                showEditor={this.showEditor}
+                                deleteCourse={this.deleteCourse}
+                            />
                         }
                     </div>
                 }
