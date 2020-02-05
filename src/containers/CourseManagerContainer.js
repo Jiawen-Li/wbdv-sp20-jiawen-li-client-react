@@ -1,7 +1,7 @@
 import React from "react";
-import CourseTableComponent from "../containers/CourseTable";
-import CourseGridComponent from "../containers/CourseGrid";
-import CourseEditorComponent from "../containers/CourseEditor/CourseEditor";
+import CourseTableComponent from "../component/CourseTableComponent";
+import CourseGridComponent from "../component/CourseGridComponent";
+import CourseEditorComponent from "../component/CourseEditorComponent";
 import {findAllCourses, deleteCourse, createCourse} from "../services/CourseService";
 
 class CourseManagerContainer extends React.Component {
