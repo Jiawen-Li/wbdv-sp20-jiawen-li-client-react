@@ -8,7 +8,7 @@ class CourseManagerContainer extends React.Component {
     state = {
         layout: 'table',
         showEditor: false,
-        newCourseTitle: 'Whatever',
+        newCourseTitle: '',
         courses: []
     }
 
@@ -32,32 +32,25 @@ class CourseManagerContainer extends React.Component {
             }
         })
 
-    deleteCourse = (course) =>
-        deleteCourse(course._id)
-            .then(status => {
-                this.setState(prevState => {
-                    return ({
-                        courses: prevState
-                            .courses
-                            .filter(function(crs) {
-                                return crs._id !== course._id
-                            })
-                    })
-                })
-            })
+    deleteCourse = async (courseid) =>{
+        await deleteCourse(courseid);
+        const newcourses = await findAllCourses()
+        this.setState({
+            courses: newcourses
+        })
 
-    addCourse = () =>
-        createCourse({
+    }
+
+    addCourse = async () =>{
+        await createCourse({
             title: this.state.newCourseTitle
-        }).then(actualCourse => this.setState(prevState => {
-                return({
-                    courses: [
-                        ...prevState.courses,
-                        actualCourse
-                    ]
-                })
-            })
-        )
+        })
+
+        this.setState({
+            courses: await findAllCourses(),
+            newCourseTitle:""
+        })
+    }
 
     showEditor = () =>
         this.setState({
@@ -69,9 +62,6 @@ class CourseManagerContainer extends React.Component {
             showEditor: false
         })
 
-    updateForm = (newState) => {
-        this.setState(newState)
-    }
 
     render() {
         return(
@@ -90,7 +80,7 @@ class CourseManagerContainer extends React.Component {
                     <div>
                         <button onClick={this.toggle}>Toggle</button>
                         <input
-                            onChange={(e) => this.updateForm({
+                            onChange={(e) => this.setState({
                                 newCourseTitle: e.target.value
                             })}
                             value={this.state.newCourseTitle}/>

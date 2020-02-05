@@ -4,6 +4,7 @@ import {updateCourse} from "../services/CourseService";
 
 const CourseTableComponent = ({courses, deleteCourse, showEditor}) =>
     <div>
+
         <h4>Dear Student, you have {courses.length} courses in your list.</h4>
         <table class = 'table'>
             <thead class = 'thead-dark'>
@@ -22,13 +23,14 @@ const CourseTableComponent = ({courses, deleteCourse, showEditor}) =>
             </thead>
             <tbody>
                 {
-                    courses.map(function(course, index){
+                    courses.map(function(course){
                         return (
                             <CourseRow
                                 course={course}
                                 showEditor={showEditor}
                                 deleteCourse={deleteCourse}
-                                updateCourse={updateCourse}/>
+                                updateCourse={updateCourse}
+                                key={course._id}/>
                         )
                     })
                 }

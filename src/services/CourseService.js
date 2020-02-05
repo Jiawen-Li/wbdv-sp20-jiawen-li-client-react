@@ -11,15 +11,13 @@ export const createCourse = (course) =>
     })
         .then(response => response.json())
 
-// export const findAllCourses = () =>
-//     fetch(API_URL)
-//         .then(response => response.json())
 
 //retrieves all course instances as an array of courses
 export const findAllCourses = async () => {
     const response = await fetch(API_URL)
     return await response.json()
 }
+
 
 // retrieves a course instance that matches the id parameter
 export const findCourseById = async (courseId) =>
