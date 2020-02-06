@@ -2,7 +2,7 @@ import React from "react";
 import GridRow from "../containers/CourseGridCardContainer";
 import {updateCourse} from "../services/CourseService";
 
-const CourseGridComponent = ({courses, deleteCourse, showEditor}) =>
+const CourseGridComponent = ({courses, deleteCourse, showEditor,change}) =>
     <div className={'container'}>
         <h4>
             <span>This is a table in grid form.</span>
@@ -20,6 +20,7 @@ const CourseGridComponent = ({courses, deleteCourse, showEditor}) =>
                                     showEditor={showEditor}
                                     deleteCourse={deleteCourse}
                                     updateCourse={updateCourse}
+                                    changeEditorTitle={change}
                                     key={course._id}/>
                             )
                         })

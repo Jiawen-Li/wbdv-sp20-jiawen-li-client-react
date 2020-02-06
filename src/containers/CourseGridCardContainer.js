@@ -12,7 +12,12 @@ class GridRow extends React.Component {
                 <div class='card-body'>
                     {
                         !this.state.editing &&
-                        <h5 class='card-title' onClick={this.props.showEditor} href="#" scope='row'>
+                        <h5 class='card-title' onClick={
+                            () => {
+                                this.props.showEditor();
+                                this.props.changeEditorTitle(this.state.course.title);
+                            }
+                        } href="#" scope='row'>
                             <i className="fas fa-book mx-2"></i>
                             {this.state.course.title}
                         </h5>
