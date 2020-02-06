@@ -29,5 +29,4 @@ const CourseGridComponent = ({courses, deleteCourse, updateCourse,showEditor,cha
         </div>
     </div>
 
-
 export default CourseGridComponent
