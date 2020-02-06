@@ -12,8 +12,8 @@ const CourseTableComponent = ({courses, deleteCourse, showEditor, change}) =>
                         <span>Title </span>
                         <i className="fas fa-sort-up"></i>
                     </th>
-                    <th scope='col'>Owned By</th>
-                    <th scope='col'>Last Modified</th>
+                    <th scope='col' className='d-none d-md-table-cell'>Owned By</th>
+                    <th scope='col' className='d-none d-md-table-cell'>Last Modified</th>
                     <th>
                         <i className="fas fa-th mx-2"></i>
                         <i className="fas fa-sort-alpha-down"></i>

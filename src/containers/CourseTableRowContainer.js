@@ -31,9 +31,9 @@ class CourseRow extends React.Component {
                     })
                 })}/></td>}
 
-                <td>Me</td>
+                <td scope='col' className='d-none d-md-table-cell'>Me</td>
 
-                <td>01/01/2020</td>
+                <td scope='col' className='d-none d-md-table-cell'>01/01/2020</td>
 
                 <td>
                     <button onClick={() => this.props.deleteCourse(this.state.course._id)}>Delete</button>
