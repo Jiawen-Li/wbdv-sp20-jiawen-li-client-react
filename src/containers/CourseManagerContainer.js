@@ -2,7 +2,7 @@ import React from "react";
 import CourseTableComponent from "../component/CourseTableComponent";
 import CourseGridComponent from "../component/CourseGridComponent";
 import CourseEditorComponent from "../component/CourseEditorComponent";
-import {findAllCourses, deleteCourse, createCourse} from "../services/CourseService";
+import {findAllCourses, deleteCourse, createCourse, updateCourse} from "../services/CourseService";
 
 class CourseManagerContainer extends React.Component {
     state = {
@@ -32,6 +32,15 @@ class CourseManagerContainer extends React.Component {
                 })
             }
         })
+
+    updateCourse= async (courseId,course)=>{
+        await updateCourse(courseId,course);
+        const newcourses = await findAllCourses();
+        this.setState({
+            courses: newcourses
+        })
+
+    }
 
     deleteCourse = async (courseid) => {
         await deleteCourse(courseid);
@@ -86,7 +95,7 @@ class CourseManagerContainer extends React.Component {
                 {
                     !this.state.showEditor &&
                     <div>
-                        <button onClick={this.toggle}>Toggle</button>
+                        <span>Please Input the Course You Want to Add: </span>
                         <input
                             onChange={(e) => this.setState({
                                 newCourseTitle: e.target.value
@@ -98,6 +107,7 @@ class CourseManagerContainer extends React.Component {
                             <CourseTableComponent
                                 showEditor={this.showEditor}
                                 deleteCourse={this.deleteCourse}
+                                updateCourse={this.updateCourse}
                                 courses={this.state.courses}
                                 change={this.changeEditorTitle}
                                 toggle={this.toggle}/>
@@ -108,6 +118,7 @@ class CourseManagerContainer extends React.Component {
                                 courses={this.state.courses}
                                 showEditor={this.showEditor}
                                 deleteCourse={this.deleteCourse}
+                                updateCourse={this.updateCourse}
                                 change={this.changeEditorTitle}
                                 toggle={this.toggle}
                             />

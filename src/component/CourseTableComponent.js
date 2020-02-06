@@ -1,8 +1,7 @@
 import React from "react";
 import CourseRow from "../containers/CourseTableRowContainer";
-import {updateCourse} from "../services/CourseService";
 
-const CourseTableComponent = ({courses, deleteCourse, showEditor, change, toggle}) =>
+const CourseTableComponent = ({courses, deleteCourse,updateCourse, showEditor, change, toggle}) =>
     <div>
         <h4>Dear Student, you have {courses.length} courses in your list.</h4>
         <table class = 'table'>

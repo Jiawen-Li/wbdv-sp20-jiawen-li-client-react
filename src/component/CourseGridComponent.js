@@ -1,8 +1,7 @@
 import React from "react";
 import GridRow from "../containers/CourseGridCardContainer";
-import {updateCourse} from "../services/CourseService";
 
-const CourseGridComponent = ({courses, deleteCourse, showEditor,change,toggle}) =>
+const CourseGridComponent = ({courses, deleteCourse, updateCourse,showEditor,change,toggle}) =>
     <div className={'container'}>
         <h4>
             <span>This is a table in grid form.</span>
