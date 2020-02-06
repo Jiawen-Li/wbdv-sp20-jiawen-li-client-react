@@ -9,7 +9,8 @@ class CourseManagerContainer extends React.Component {
         layout: 'table',
         showEditor: false,
         newCourseTitle: '',
-        courses: []
+        courses: [],
+        editorTitle: ""
     }
 
     componentDidMount = async () => {
@@ -21,7 +22,7 @@ class CourseManagerContainer extends React.Component {
 
     toggle = () =>
         this.setState(prevState => {
-            if(prevState.layout === 'table') {
+            if (prevState.layout === 'table') {
                 return ({
                     layout: 'grid'
                 })
@@ -32,7 +33,7 @@ class CourseManagerContainer extends React.Component {
             }
         })
 
-    deleteCourse = async (courseid) =>{
+    deleteCourse = async (courseid) => {
         await deleteCourse(courseid);
         const newcourses = await findAllCourses()
         this.setState({
@@ -41,15 +42,20 @@ class CourseManagerContainer extends React.Component {
 
     }
 
+    changeEditorTitle = (title) => {
+        this.setState({
+            editorTitle: title
+        })
+    }
 
-    addCourse = async () =>{
+    addCourse = async () => {
         await createCourse({
             title: this.state.newCourseTitle
         })
 
         this.setState({
             courses: await findAllCourses(),
-            newCourseTitle:""
+            newCourseTitle: ""
         })
     }
 
@@ -65,7 +71,7 @@ class CourseManagerContainer extends React.Component {
 
 
     render() {
-        return(
+        return (
             <div>
 
                 <h1>Course Manager</h1>
@@ -73,7 +79,9 @@ class CourseManagerContainer extends React.Component {
                 {
                     this.state.showEditor &&
                     <CourseEditorComponent
-                        hideEditor={this.hideEditor}/>
+                        editorCourseTitle={this.state.editorTitle}
+                        hideEditor={this.hideEditor}
+                    />
                 }
 
                 {
@@ -91,7 +99,8 @@ class CourseManagerContainer extends React.Component {
                             <CourseTableComponent
                                 showEditor={this.showEditor}
                                 deleteCourse={this.deleteCourse}
-                                courses={this.state.courses}/>
+                                courses={this.state.courses}
+                                change={this.changeEditorTitle}/>
                         }
                         {
                             this.state.layout === 'grid'
@@ -99,6 +108,7 @@ class CourseManagerContainer extends React.Component {
                                 courses={this.state.courses}
                                 showEditor={this.showEditor}
                                 deleteCourse={this.deleteCourse}
+                                change={this.changeEditorTitle}
                             />
                         }
                     </div>

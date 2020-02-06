@@ -2,7 +2,7 @@ import React from "react";
 import CourseRow from "../containers/CourseTableRowContainer";
 import {updateCourse} from "../services/CourseService";
 
-const CourseTableComponent = ({courses, deleteCourse, showEditor}) =>
+const CourseTableComponent = ({courses, deleteCourse, showEditor, change}) =>
     <div>
         <h4>Dear Student, you have {courses.length} courses in your list.</h4>
         <table class = 'table'>
@@ -29,6 +29,7 @@ const CourseTableComponent = ({courses, deleteCourse, showEditor}) =>
                                 showEditor={showEditor}
                                 deleteCourse={deleteCourse}
                                 updateCourse={updateCourse}
+                                changeEditorTitle={change}
                                 key={course._id}/>
                         )
                     })
