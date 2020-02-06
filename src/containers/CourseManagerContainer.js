@@ -39,7 +39,6 @@ class CourseManagerContainer extends React.Component {
         this.setState({
             courses: newcourses
         })
-
     }
 
     changeEditorTitle = (title) => {
@@ -100,7 +99,8 @@ class CourseManagerContainer extends React.Component {
                                 showEditor={this.showEditor}
                                 deleteCourse={this.deleteCourse}
                                 courses={this.state.courses}
-                                change={this.changeEditorTitle}/>
+                                change={this.changeEditorTitle}
+                                toggle={this.toggle}/>
                         }
                         {
                             this.state.layout === 'grid'
@@ -109,6 +109,7 @@ class CourseManagerContainer extends React.Component {
                                 showEditor={this.showEditor}
                                 deleteCourse={this.deleteCourse}
                                 change={this.changeEditorTitle}
+                                toggle={this.toggle}
                             />
                         }
                     </div>

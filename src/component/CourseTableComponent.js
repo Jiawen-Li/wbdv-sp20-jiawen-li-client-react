@@ -2,7 +2,7 @@ import React from "react";
 import CourseRow from "../containers/CourseTableRowContainer";
 import {updateCourse} from "../services/CourseService";
 
-const CourseTableComponent = ({courses, deleteCourse, showEditor, change}) =>
+const CourseTableComponent = ({courses, deleteCourse, showEditor, change, toggle}) =>
     <div>
         <h4>Dear Student, you have {courses.length} courses in your list.</h4>
         <table class = 'table'>
@@ -15,7 +15,7 @@ const CourseTableComponent = ({courses, deleteCourse, showEditor, change}) =>
                     <th scope='col' className='d-none d-md-table-cell'>Owned By</th>
                     <th scope='col' className='d-none d-md-table-cell'>Last Modified</th>
                     <th>
-                        <i className="fas fa-th mx-2"></i>
+                        <i className="fas fa-th mx-2" onClick={toggle}></i>
                         <i className="fas fa-sort-alpha-down"></i>
                     </th>
                 </tr>
