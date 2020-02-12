@@ -1,5 +1,6 @@
 import React from "react";
 import CourseRow from "../containers/CourseTableRowContainer";
+import {Link} from "react-router-dom";
 
 const CourseTableComponent = ({courses, deleteCourse,updateCourse, showEditor, change, toggle}) =>
     <div>
@@ -14,7 +15,7 @@ const CourseTableComponent = ({courses, deleteCourse,updateCourse, showEditor, c
                     <th scope='col' className='d-none d-md-table-cell'>Owned By</th>
                     <th scope='col' className='d-none d-md-table-cell'>Last Modified</th>
                     <th>
-                        <i className="fas fa-th mx-2" onClick={toggle}></i>
+                        <Link to={"/grid"}><i className="fas fa-th mx-2"></i></Link>
                         <i className="fas fa-sort-alpha-down"></i>
                     </th>
                 </tr>

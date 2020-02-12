@@ -83,55 +83,59 @@ class CourseManagerContainer extends React.Component {
     }
 
 
-    plainText = () => {
-        return (
+
+    tableView=()=>{
+        return(
             <div>
-                {
-                    this.state.showEditor &&
-                    <CourseEditorComponent
-                        editorCourseTitle={this.state.editorTitle}
-                        hideEditor={this.hideEditor}
-                    />
-                }
-                {
-                    !this.state.showEditor &&
-                    <div>
-                        <span>Please Input the Course You Want to Add: </span>
-                        <input
-                            onChange={(e) => this.setState({
-                                newCourseTitle: e.target.value
-                            })}
-                            value={this.state.newCourseTitle}/>
-                        <button onClick={this.addCourse}>Add Course</button>
-                        {
-                            this.state.layout === 'table' &&
-                            <CourseTableComponent
-                                showEditor={this.showEditor}
-                                deleteCourse={this.deleteCourse}
-                                updateCourse={this.updateCourse}
-                                courses={this.state.courses}
-                                change={this.changeEditorTitle}
-                                toggle={this.toggle}/>
-                        }
-                        {
-                            this.state.layout === 'grid'
-                            && <CourseGridComponent
-                                courses={this.state.courses}
-                                showEditor={this.showEditor}
-                                deleteCourse={this.deleteCourse}
-                                updateCourse={this.updateCourse}
-                                change={this.changeEditorTitle}
-                                toggle={this.toggle}
-                            />
-                        }
-                    </div>
-                }
+                <div>
+                    <span>Please Input the Course You Want to Add: </span>
+                    <input
+                        onChange={(e) => this.setState({
+                            newCourseTitle: e.target.value
+                        })}
+                        value={this.state.newCourseTitle}/>
+                    <button onClick={this.addCourse}>Add Course</button>
+                    <CourseTableComponent
+                        showEditor={this.showEditor}
+                        deleteCourse={this.deleteCourse}
+                        updateCourse={this.updateCourse}
+                        courses={this.state.courses}
+                        change={this.changeEditorTitle}
+                        toggle={this.toggle}/>
+                </div>
+
 
 
             </div>
         )
     }
 
+    gridView=()=>{
+        return(
+            <div>
+                <div>
+                    <span>Please Input the Course You Want to Add: </span>
+                    <input
+                        onChange={(e) => this.setState({
+                            newCourseTitle: e.target.value
+                        })}
+                        value={this.state.newCourseTitle}/>
+                    <button onClick={this.addCourse}>Add Course</button>
+                    <CourseGridComponent
+                        courses={this.state.courses}
+                        showEditor={this.showEditor}
+                        deleteCourse={this.deleteCourse}
+                        updateCourse={this.updateCourse}
+                        change={this.changeEditorTitle}
+                        toggle={this.toggle}
+                    />
+                </div>
+
+
+
+            </div>
+        )
+    }
 
     render() {
         return (
@@ -169,8 +173,17 @@ class CourseManagerContainer extends React.Component {
                     <Route path="/"
                            exact={true}
                            render={() =>
-                               this.plainText()}/>
+                               this.tableView()}/>
 
+                    <Route path="/table"
+                           exact={true}
+                           render={() =>
+                               this.tableView()}/>
+
+                    <Route path="/grid"
+                           exact={true}
+                           render={() =>
+                               this.gridView()}/>
                 </Router>
 
                 {/*// {*/}

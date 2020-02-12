@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 class CourseRow extends React.Component {
     state = {
@@ -11,16 +12,12 @@ class CourseRow extends React.Component {
             <tr>
                 {
                     !this.state.editing &&
-                    <td onClick={
-                        () => {
-                            this.props.showEditor();
-                            this.props.changeEditorTitle(this.state.course.title);
-                        }
-                    }
-                        href="#" scope='row'>
+                   <Link to={`/course-editor/${this.state.course._id}`}>
+                       <td scope='row'>
                         <i className="fas fa-book mx-2"></i>
                         {this.state.course.title}
-                    </td>
+                        </td>
+                   </Link>
                 }
 
                 {this.state.editing && <td><input onChange={(event => {

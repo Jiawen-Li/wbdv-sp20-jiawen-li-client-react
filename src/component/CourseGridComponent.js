@@ -1,11 +1,12 @@
 import React from "react";
 import GridRow from "../containers/CourseGridCardContainer";
+import {Link} from "react-router-dom";
 
 const CourseGridComponent = ({courses, deleteCourse, updateCourse,showEditor,change,toggle}) =>
     <div className={'container'}>
         <h4>
             <span>This is a table in grid form.</span>
-            <i className="fas fa-list float-right" onClick={toggle}></i>
+            <Link to={"/table"}><i className="fas fa-list float-right"></i></Link>
         </h4>
 
         <div className={"container"}>
