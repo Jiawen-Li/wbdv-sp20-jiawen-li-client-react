@@ -3,6 +3,7 @@ import CourseTableComponent from "../component/CourseTableComponent";
 import CourseGridComponent from "../component/CourseGridComponent";
 import CourseEditorComponent from "../component/CourseEditorComponent";
 import {findAllCourses, deleteCourse, createCourse, updateCourse} from "../services/CourseService";
+import {BrowserRouter as Router, Link, Route} from "react-router-dom";
 
 class CourseManagerContainer extends React.Component {
     state = {
@@ -33,8 +34,8 @@ class CourseManagerContainer extends React.Component {
             }
         })
 
-    updateCourse= async (courseId,course)=>{
-        await updateCourse(courseId,course);
+    updateCourse = async (courseId, course) => {
+        await updateCourse(courseId, course);
         const newcourses = await findAllCourses();
         this.setState({
             courses: newcourses
@@ -77,13 +78,14 @@ class CourseManagerContainer extends React.Component {
             showEditor: false
         })
 
+    updateForm = (newState) => {
+        this.setState(newState)
+    }
 
-    render() {
+
+    plainText = () => {
         return (
             <div>
-
-                <h1>Course Manager</h1>
-
                 {
                     this.state.showEditor &&
                     <CourseEditorComponent
@@ -91,7 +93,6 @@ class CourseManagerContainer extends React.Component {
                         hideEditor={this.hideEditor}
                     />
                 }
-
                 {
                     !this.state.showEditor &&
                     <div>
@@ -125,6 +126,94 @@ class CourseManagerContainer extends React.Component {
                         }
                     </div>
                 }
+
+
+            </div>
+        )
+    }
+
+
+    render() {
+        return (
+            <div>
+
+                <h1>Course Manager</h1>
+
+                <Router>
+
+                    <Route path="/course-editor/:courseId"
+                           exact={true}
+                           render={(props) => <CourseEditorComponent
+                               {...props}
+                               courseId={props.match.params.courseId}/>}
+                    />
+
+                    <Route path="/course-editor/:courseId/module/:moduleId"
+                           exact={true}
+                           render={(props) =>
+                               <CourseEditorComponent
+                                   {...props}
+                                   moduleId={props.match.params.moduleId}
+                                   courseId={props.match.params.courseId}/>
+                           }/>
+                    <Route path="/course-editor/:courseId/module/:moduleId/lesson/:lessonId"
+                           exact={true}
+                           render={(props) =>
+                               <CourseEditorComponent
+                                   {...props}
+                                   lessonId={props.match.params.lessonId}
+                                   moduleId={props.match.params.moduleId}
+                                   courseId={props.match.params.courseId}/>
+                           }/>
+
+                    <Route path="/"
+                           exact={true}
+                           render={() =>
+                               this.plainText()}/>
+
+                </Router>
+
+                {/*// {*/}
+                {/*//     this.state.showEditor &&*/}
+                {/*//     <CourseEditorComponent*/}
+                {/*//         editorCourseTitle={this.state.editorTitle}*/}
+                {/*//         hideEditor={this.hideEditor}*/}
+                {/*//     />*/}
+                {/*// }*/}
+                {/*//*/}
+                {/*// {*/}
+                {/*//     !this.state.showEditor &&*/}
+                {/*//     <div>*/}
+                {/*//         <span>Please Input the Course You Want to Add: </span>*/}
+                {/*//         <input*/}
+                {/*//             onChange={(e) => this.setState({*/}
+                {/*//                 newCourseTitle: e.target.value*/}
+                {/*//             )}*/}
+                {/*//             value={this.state.newCourseTitle}/>*/}
+                {/*//         <button onClick={this.addCourse}>Add Course</button>*/}
+                {/*//         {*/}
+                {/*//             this.state.layout === 'table' &&*/}
+                {/*//             <CourseTableComponent*/}
+                {/*//                 showEditor={this.showEditor}*/}
+                {/*//                 deleteCourse={this.deleteCourse}*/}
+                {/*//                 updateCourse={this.updateCourse}*/}
+                {/*//                 courses={this.state.courses}*/}
+                {/*//                 change={this.changeEditorTitle}*/}
+                {/*//                 toggle={this.toggle}/>*/}
+                {/*//         }*/}
+                {/*//         {*/}
+                {/*//             this.state.layout === 'grid'*/}
+                {/*//             && <CourseGridComponent*/}
+                {/*//                 courses={this.state.courses}*/}
+                {/*//                 showEditor={this.showEditor}*/}
+                {/*//                 deleteCourse={this.deleteCourse}*/}
+                {/*//                 updateCourse={this.updateCourse}*/}
+                {/*//                 change={this.changeEditorTitle}*/}
+                {/*//                 toggle={this.toggle}*!/*/}
+                {/*//             />*/}
+                {/*//         }*/}
+                {/*//     </div>*/}
+                {/*// }*/}
 
             </div>
         )
