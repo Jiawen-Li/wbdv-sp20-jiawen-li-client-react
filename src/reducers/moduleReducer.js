@@ -11,6 +11,7 @@ const moduleReducer = (state = initialState, action) => {
             return {
                 modules: action.modules
             }
+
         case CREATE_MODULE:
             return {
                 modules: [
