@@ -1,9 +1,9 @@
 import React from "react";
 import CourseTableComponent from "../component/CourseTableComponent";
 import CourseGridComponent from "../component/CourseGridComponent";
-import CourseEditorComponent from "../component/CourseEditorComponent";
 import {findAllCourses, deleteCourse, createCourse, updateCourse} from "../services/CourseService";
 import {BrowserRouter as Router, Link, Route} from "react-router-dom";
+import CourseEditorComponent from "../component/CourseEditor/CourseEditorComponent";
 
 class CourseManagerContainer extends React.Component {
     state = {
@@ -154,21 +154,17 @@ class CourseManagerContainer extends React.Component {
 
                     <Route path="/course-editor/:courseId/module/:moduleId"
                            exact={true}
-                           render={(props) =>
-                               <CourseEditorComponent
-                                   {...props}
-                                   moduleId={props.match.params.moduleId}
-                                   courseId={props.match.params.courseId}/>
-                           }/>
+                           render={(props) => <CourseEditorComponent
+                               {...props}
+                               courseId={props.match.params.courseId}/>}
+
+                           />
                     <Route path="/course-editor/:courseId/module/:moduleId/lesson/:lessonId"
                            exact={true}
-                           render={(props) =>
-                               <CourseEditorComponent
-                                   {...props}
-                                   lessonId={props.match.params.lessonId}
-                                   moduleId={props.match.params.moduleId}
-                                   courseId={props.match.params.courseId}/>
-                           }/>
+                           render={(props) => <CourseEditorComponent
+                               {...props}
+                               courseId={props.match.params.courseId}/>}
+                    />
 
                     <Route path="/"
                            exact={true}
