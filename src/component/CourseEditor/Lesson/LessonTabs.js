@@ -57,7 +57,7 @@ class LessonListComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        ifLessonEditingIndex: state.modules.ifLessonEditingIndex,
+        ifLessonEditingIndex: state.lessons.ifLessonEditingIndex,
         lessons: state.lessons.lessons,
         lessonEditingContent: state.lessons.lessonEditingContent
     }
@@ -68,7 +68,7 @@ const dispatchToPropertyMapper = (dispatch) => {
 
         findLessonForModule: (moduleId) =>
             lessonService.findLessonsForModule(moduleId)
-                .then(actualLessons => dispatch(lessonActions.findLessonForModule(actualLessons))),
+                .then(actualLessons => dispatch(lessonActions.findLessonsForModule(actualLessons))),
 
         deleteLesson: (lessonId) =>
             lessonService.deleteLesson(lessonId)
