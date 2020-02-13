@@ -11,46 +11,50 @@ class TopicListComponent extends React.Component {
 
     render() {
         return (
-            <ul>
-                {this.props.topics && this.props.topics.map((topic, index) =>
-                    <li key={topic._id}>
-                        <button onClick={
-                            () => this.props.deleteTopic(topic._id)}>
-                            Delete
-                        </button>
-                        {index !== this.props.ifTopicEditingIndex &&
-                        <>
+            <>
+                <h2>Topic pill</h2>
+                <ul>
+                    {this.props.topics && this.props.topics.map((topic, index) =>
+                        <li key={topic._id}>
                             <button onClick={
-                                () => this.props.editTopic(index, topic.title)}>
-                                Edit
+                                () => this.props.deleteTopic(topic._id)}>
+                                Delete
                             </button>
-                            {topic.title}
-                        </>}
+                            {index !== this.props.ifTopicEditingIndex &&
+                            <>
+                                <button onClick={
+                                    () => this.props.editTopic(index, topic.title)}>
+                                    Edit
+                                </button>
+                                {topic.title}
+                            </>}
 
-                        {index == this.props.ifTopicEditingIndex &&
-                        <>
-                            <button onClick={
-                                () =>
-                                    this.props.saveTopic(
-                                        topic._id,
-                                        {"title":this.props.topicEditingContent}
-                                    )
-                            }>
-                                save
-                            </button>
-                            <input value={this.props.topicEditingContent}
-                                   onChange={event => this.props.changeTopic(event.target.value)}/>
-                        </>
-                        }
+                            {index == this.props.ifTopicEditingIndex &&
+                            <>
+                                <button onClick={
+                                    () =>
+                                        this.props.saveTopic(
+                                            topic._id,
+                                            {"title": this.props.topicEditingContent}
+                                        )
+                                }>
+                                    save
+                                </button>
+                                <input value={this.props.topicEditingContent}
+                                       onChange={event => this.props.changeTopic(event.target.value)}/>
+                            </>
+                            }
+                        </li>
+                    )}
+                    <li>
+                        <button onClick={
+                            () => this.props.createTopic(this.props.match.params.lessonId)}>
+                            Create
+                        </button>
                     </li>
-                )}
-                <li>
-                    <button onClick={
-                        () => this.props.createTopic(this.props.match.params.lessonId)}>
-                        Create
-                    </button>
-                </li>
-            </ul>
+                </ul>
+            </>
+
         );
     }
 }

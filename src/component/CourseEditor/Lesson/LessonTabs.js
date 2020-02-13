@@ -10,6 +10,13 @@ class LessonListComponent extends React.Component {
         this.props.findLessonForModule(this.props.match.params.moduleId)
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.moduleId !== this.props.match.params.moduleId) {
+            this.props.findLessonForModule(this.props.match.params.moduleId);
+        }
+
+    }
+
     render() {
         return (
             <ul>

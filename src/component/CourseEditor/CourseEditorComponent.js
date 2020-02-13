@@ -33,15 +33,22 @@ const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =
                 <div className="col-4">
                     {match.params.moduleId &&
                     <LessonTabs
+                        moduleId={moduleId}
                         match={match}/>
                     }
                     {/*<LessonTabs*/}
                     {/*    moduleId={moduleId}*/}
                     {/*    courseId={courseId}/>*/}
-                    {/*<TopicPills*/}
-                    {/*    lessonId={lessonId}*/}
-                    {/*    moduleId={moduleId}*/}
-                    {/*    courseId={courseId}/>*/}
+                    {match.params.lessonId &&
+                    <TopicPills
+                        match={match}
+                        lessonId={lessonId}
+                        moduleId={moduleId}
+                        courseId={courseId}/>
+                    }
+
+
+
 
                 </div>
             </div>
