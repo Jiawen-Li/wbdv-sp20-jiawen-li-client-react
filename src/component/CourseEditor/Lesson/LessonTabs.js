@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import * as lessonService from "../../../services/LessonService";
-import * as lessonActions from "../../../actions/moduleActions";
+import * as lessonActions from "../../../actions/lessonActions";
 
 
 class LessonListComponent extends React.Component {
@@ -68,7 +68,7 @@ const dispatchToPropertyMapper = (dispatch) => {
 
         findLessonForModule: (moduleId) =>
             lessonService.findLessonsForModule(moduleId)
-                .then(actualLessons => dispatch(lessonActions.findLessonsForModule(actualLessons))),
+                .then(actualLessons => dispatch(lessonActions.findLessonForModule(actualLessons))),
 
         deleteLesson: (lessonId) =>
             lessonService.deleteLesson(lessonId)
@@ -89,13 +89,13 @@ const dispatchToPropertyMapper = (dispatch) => {
             lessonService.updateLesson(lessonId, lesson).then(
                 r => {
                     dispatch(lessonService.updateLesson(lessonId, lesson));
-                    dispatch(lessonService.saveLesson())
+                    dispatch(lessonActions.saveLesson())
                 }
             )
         },
 
         changeLesson: (content) => {
-            dispatch(lessonService.changeLessonEditingContent(content))
+            dispatch(lessonActions.changeLessonEditingContent(content))
         }
 
     }

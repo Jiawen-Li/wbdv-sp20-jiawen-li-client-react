@@ -68,7 +68,7 @@ const dispatchToPropertyMapper = (dispatch) => {
 
         findTopicForLesson: (lessonId) =>
             topicService.findTopicsForLesson(lessonId)
-                .then(actualTopics => dispatch(topicService.findTopicsForLesson(actualTopics))),
+                .then(actualTopics => dispatch(topicActions.findTopicForLesson(actualTopics))),
 
         deleteTopic: (topicId) =>
             topicService.deleteTopic(topicId)
@@ -88,14 +88,14 @@ const dispatchToPropertyMapper = (dispatch) => {
         saveTopic: (topicId, topic) => {
             topicService.updateTopic(topicId, topic).then(
                 r => {
-                    dispatch(topicService.updateTopic(lessoId, lesson));
-                    dispatch(topicService.saveTopic())
+                    dispatch(topicService.updateTopic(topicId, topic));
+                    dispatch(topicActions.saveTopic())
                 }
             )
         },
 
         changeTopic: (content) => {
-            dispatch(topicService.changeTopicEditingContent(content))
+            dispatch(topicActions.changeTopicEditingContent(content))
         }
 
     }
