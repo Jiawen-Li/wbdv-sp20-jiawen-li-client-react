@@ -6,7 +6,7 @@ import * as topicActions from "../../../actions/topicActions";
 
 class TopicListComponent extends React.Component {
     componentDidMount() {
-        this.props.findTopicForLesson(this.props.lessonId)
+        this.props.findTopicForLesson(this.props.match.params.lessonId)
     }
 
     render() {
@@ -46,7 +46,7 @@ class TopicListComponent extends React.Component {
                 )}
                 <li>
                     <button onClick={
-                        () => this.props.createTopic(this.props.topicId)}>
+                        () => this.props.createTopic(this.props.match.params.lessonId)}>
                         Create
                     </button>
                 </li>
@@ -88,7 +88,7 @@ const dispatchToPropertyMapper = (dispatch) => {
         saveTopic: (topicId, topic) => {
             topicService.updateTopic(topicId, topic).then(
                 r => {
-                    dispatch(topicService.updateTopic(topicId, topic));
+                    dispatch(topicActions.updateTopic(topicId, topic));
                     dispatch(topicActions.saveTopic())
                 }
             )

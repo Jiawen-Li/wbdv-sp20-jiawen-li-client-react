@@ -6,7 +6,6 @@ import * as lessonActions from "../../../actions/lessonActions";
 
 class LessonListComponent extends React.Component {
     componentDidMount() {
-        console.log(this.props.match.params.moduleId);
         this.props.findLessonForModule(this.props.match.params.moduleId)
     }
 
