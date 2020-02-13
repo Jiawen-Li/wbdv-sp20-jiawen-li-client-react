@@ -12,19 +12,43 @@ class ModuleListComponent extends React.Component {
     render() {
         return (
             <ul>
-                {this.props.modules && this.props.modules.map(module =>
+                {this.props.modules && this.props.modules.map((module, index) =>
                     <li key={module._id}>
                         <button onClick={
                             () => this.props.deleteModule(module._id)}>
                             Delete
                         </button>
-                        {module.title}
+                        {index !== this.props.ifModuleEditingIndex &&
+                        <>
+                            <button onClick={
+                                () => this.props.editModule(index, module.title)}>
+                                Edit
+                            </button>
+                            {module.title}
+                        </>}
+
+                        {index == this.props.ifModuleEditingIndex &&
+                        <>
+                            <button onClick={
+                                () =>
+                                    this.props.saveModule(
+                                        module._id,
+                                        {"title":this.props.moduleEditingContent}
+                                    )
+                            }>
+                                save
+                            </button>
+                            <input value={this.props.moduleEditingContent}
+                                   onChange={event => this.props.changeModule(event.target.value)}/>
+                        </>
+                        }
                     </li>
                 )}
                 <li>
                     <button onClick={
                         () => this.props.createModule(this.props.courseId)}>
-                        Create</button>
+                        Create
+                    </button>
                 </li>
             </ul>
         );
@@ -33,7 +57,9 @@ class ModuleListComponent extends React.Component {
 
 const stateToPropertyMapper = (state) => {
     return {
-        modules: state.modules.modules
+        ifModuleEditingIndex: state.modules.ifModuleEditingIndex,
+        modules: state.modules.modules,
+        moduleEditingContent: state.modules.moduleEditingContent
     }
 }
 
@@ -48,9 +74,24 @@ const dispatchToPropertyMapper = (dispatch) => {
                     dispatch(moduleActions.deleteModule(moduleId))),
         createModule: (courseId) => {
             moduleService.createModule(courseId).then(
-                module=>dispatch(moduleActions.createModule(module))
+                module => dispatch(moduleActions.createModule(module))
             )
+        },
+        editModule: (index, content) => {
+            dispatch(moduleActions.changeModuleEditingStatus(index, content))
+        },
+        saveModule: (moduleId, module) => {
+            moduleService.updateModule(moduleId, module).then(
+                r => {
+                    dispatch(moduleActions.updateModule(moduleId, module));
+                    dispatch(moduleActions.saveModule())
+                }
+            )
+        },
+        changeModule: (content) => {
+            dispatch(moduleActions.changeModuleEditingContent(content))
         }
+
     }
 };
 
