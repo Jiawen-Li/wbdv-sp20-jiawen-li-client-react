@@ -9,10 +9,17 @@ class TopicListComponent extends React.Component {
         this.props.findTopicForLesson(this.props.match.params.lessonId)
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.lessonId !== this.props.match.params.lessonId) {
+            this.props.findTopicForLesson(this.props.match.params.lessonId);
+        }
+
+    }
+
     render() {
         return (
             <>
-                <h2>Topic pill</h2>
+                <h2>Topic Pill Part</h2>
                 <ul>
                     {this.props.topics && this.props.topics.map((topic, index) =>
                         <li key={topic._id}>
