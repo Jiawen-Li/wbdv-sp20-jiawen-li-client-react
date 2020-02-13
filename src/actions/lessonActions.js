@@ -38,6 +38,6 @@ export const changeLessonEditingContent = (content) => ({
 });
 
 export const SAVE_LESSON = "SAVE_LESSON";
-export const saveModule=()=>({
+export const saveLesson=()=>({
     type: SAVE_LESSON
 })
