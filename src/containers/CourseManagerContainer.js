@@ -32,7 +32,7 @@ class CourseManagerContainer extends React.Component {
                     layout: 'table'
                 })
             }
-        })
+        });
 
     updateCourse = async (courseId, course) => {
         await updateCourse(courseId, course);
