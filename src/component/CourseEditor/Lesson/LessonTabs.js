@@ -6,7 +6,8 @@ import * as lessonActions from "../../../actions/lessonActions";
 
 class LessonListComponent extends React.Component {
     componentDidMount() {
-        this.props.findLessonForModule(this.props.moduleId)
+        console.log(this.props.match.params.moduleId);
+        this.props.findLessonForModule(this.props.match.params.moduleId)
     }
 
     render() {
@@ -46,7 +47,7 @@ class LessonListComponent extends React.Component {
                 )}
                 <li>
                     <button onClick={
-                        () => this.props.createLesson(this.props.lessonId)}>
+                        () => this.props.createLesson(this.props.match.params.moduleId)}>
                         Create
                     </button>
                 </li>
@@ -75,8 +76,8 @@ const dispatchToPropertyMapper = (dispatch) => {
                 .then(status =>
                     dispatch(lessonActions.deleteLesson(lessonId))),
 
-        createLesson: (lessonId) => {
-            lessonService.createLesson(lessonId).then(
+        createLesson: (moduleId) => {
+            lessonService.createLesson(moduleId).then(
                 lesson => dispatch(lessonActions.createLesson(lesson))
             )
         },
@@ -88,7 +89,7 @@ const dispatchToPropertyMapper = (dispatch) => {
         saveLesson: (lessonId, lesson) => {
             lessonService.updateLesson(lessonId, lesson).then(
                 r => {
-                    dispatch(lessonService.updateLesson(lessonId, lesson));
+                    dispatch(lessonActions.updateLesson(lessonId, lesson));
                     dispatch(lessonActions.saveLesson())
                 }
             )

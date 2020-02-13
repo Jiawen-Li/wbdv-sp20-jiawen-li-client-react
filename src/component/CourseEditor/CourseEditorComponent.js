@@ -17,7 +17,7 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer)
 
-const CourseEditorComponent = ({history, courseId, moduleId, lessonId}) =>
+const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =>
     <Provider store={store}>
         <div>
             <Link to="/">Back</Link>
@@ -27,9 +27,14 @@ const CourseEditorComponent = ({history, courseId, moduleId, lessonId}) =>
             <div className="row">
                 <div className="col-4">
                     <ModuleListComponent
+                        match={match}
                         courseId={courseId}/>
                 </div>
-                <div className="col-8">
+                <div className="col-4">
+                    {match.params.moduleId &&
+                    <LessonTabs
+                        match={match}/>
+                    }
                     {/*<LessonTabs*/}
                     {/*    moduleId={moduleId}*/}
                     {/*    courseId={courseId}/>*/}

@@ -83,9 +83,8 @@ class CourseManagerContainer extends React.Component {
     }
 
 
-
-    tableView=()=>{
-        return(
+    tableView = () => {
+        return (
             <div>
                 <div>
                     <span>Please Input the Course You Want to Add: </span>
@@ -105,13 +104,12 @@ class CourseManagerContainer extends React.Component {
                 </div>
 
 
-
             </div>
         )
     }
 
-    gridView=()=>{
-        return(
+    gridView = () => {
+        return (
             <div>
                 <div>
                     <span>Please Input the Course You Want to Add: </span>
@@ -130,7 +128,6 @@ class CourseManagerContainer extends React.Component {
                         toggle={this.toggle}
                     />
                 </div>
-
 
 
             </div>
@@ -158,7 +155,7 @@ class CourseManagerContainer extends React.Component {
                                {...props}
                                courseId={props.match.params.courseId}/>}
 
-                           />
+                    />
                     <Route path="/course-editor/:courseId/module/:moduleId/lesson/:lessonId"
                            exact={true}
                            render={(props) => <CourseEditorComponent
