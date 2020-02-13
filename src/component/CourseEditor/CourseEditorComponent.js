@@ -1,7 +1,7 @@
 import React from "react";
 import ModuleListComponent from "./module/ModuleListComponent";
-import LessonTabs from "./LessonTabs";
-import TopicPills from "./TopicPills";
+import LessonTabs from "./Lesson/LessonTabs";
+import TopicPills from "./Topic/TopicPills";
 import {Link} from "react-router-dom";
 import {combineReducers, createStore} from "redux";
 import {Provider} from "react-redux";
