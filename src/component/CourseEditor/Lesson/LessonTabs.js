@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import * as lessonService from "../../../services/LessonService";
 import * as lessonActions from "../../../actions/lessonActions";
+import {Link} from "react-router-dom";
 
 
 class LessonListComponent extends React.Component {
@@ -24,7 +25,9 @@ class LessonListComponent extends React.Component {
                                 () => this.props.editLesson(index, lesson.title)}>
                                 Edit
                             </button>
-                            {lesson.title}
+                            <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${lesson._id}`}>
+                                {lesson.title}
+                            </Link>
                         </>}
 
                         {index == this.props.ifLessonEditingIndex &&
