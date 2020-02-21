@@ -1,7 +1,7 @@
 export const CREATE_WIDGET = "CREATE_WIDGET";
 export const createWidget = (widget) => ({
     type: CREATE_WIDGET,
-    newWidget：widget
+    newWidget: widget
 });
 
 export const DELETE_WIDGET = "DELETE_WIDGET";
@@ -51,7 +51,7 @@ export const previewOn = () => ({
     type: PREVIEW_ON
 })
 
-export const PREVIEW_OFF  "PREVIEW_OFF";
+export const PREVIEW_OFF = "PREVIEW_OFF";
 export const previewOff = () => ({
     type: PREVIEW_OFF
 })
