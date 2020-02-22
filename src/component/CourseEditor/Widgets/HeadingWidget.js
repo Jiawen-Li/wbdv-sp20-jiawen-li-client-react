@@ -34,7 +34,7 @@ class HeadingWidget extends React.Component {
                                     }
                                 }))
                             }}
-                            value={this.state.widget.size}>
+                            value={this.props.widget.size}>
                             <option value={1}>Heading 1</option>
                             <option value={2}>Heading 2</option>
                             <option value={3}>Heading 3</option>
@@ -49,7 +49,7 @@ class HeadingWidget extends React.Component {
                                     type: newType
                                 })
                             }}
-                            value={this.state.widget.type}>
+                            value={this.props.widget.type}>
                             <option value={"HEADING"}>Heading</option>
                             <option value={"PARAGRAPH"}>Paragraph</option>
 
@@ -59,12 +59,12 @@ class HeadingWidget extends React.Component {
                 {
                     !this.props.editing &&
                     <span>
-                        {this.state.widget.size === 1 && <h1>{this.state.widget.value}</h1>}
-                        {this.state.widget.size === 2 && <h2>{this.state.widget.value}</h2>}
-                        {this.state.widget.size === 3 && <h3>{this.state.widget.value}</h3>}
-                        {this.state.widget.size === 4 && <h4>{this.state.widget.value}</h4>}
-                        {this.state.widget.size === 5 && <h5>{this.state.widget.value}</h5>}
-                        {this.state.widget.size === 6 && <h6>{this.state.widget.value}</h6>}
+                        {this.props.widget.size === 1 && <h1>{this.props.widget.value}</h1>}
+                        {this.props.widget.size === 2 && <h2>{this.props.widget.value}</h2>}
+                        {this.props.widget.size === 3 && <h3>{this.props.widget.value}</h3>}
+                        {this.props.widget.size === 4 && <h4>{this.props.widget.value}</h4>}
+                        {this.props.widget.size === 5 && <h5>{this.props.widget.value}</h5>}
+                        {this.props.widget.size === 6 && <h6>{this.props.widget.value}</h6>}
                     </span>
                 }
             </div>
