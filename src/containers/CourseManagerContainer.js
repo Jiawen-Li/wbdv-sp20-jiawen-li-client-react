@@ -163,6 +163,13 @@ class CourseManagerContainer extends React.Component {
                                courseId={props.match.params.courseId}/>}
                     />
 
+                    <Route path="/course-editor/:courseId/module/:moduleId/lesson/:lessonId/topic/:topicId"
+                           exact={true}
+                           render={(props) => <CourseEditorComponent
+                               {...props}
+                               courseId={props.match.params.courseId}/>}
+                    />
+
                     <Route path="/"
                            exact={true}
                            render={() =>

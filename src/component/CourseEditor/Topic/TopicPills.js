@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import * as topicService from "../../../services/TopicService";
 import * as topicActions from "../../../actions/topicActions";
+import {Link} from "react-router-dom";
 
 
 class TopicListComponent extends React.Component {
@@ -33,7 +34,9 @@ class TopicListComponent extends React.Component {
                                     () => this.props.editTopic(index, topic.title)}>
                                     Edit
                                 </button>
-                                {topic.title}
+                                <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${this.props.match.params.lessonId}/topic/${topic._id}`}>
+                                    {topic.title}
+                                </Link>
                             </>}
 
                             {index == this.props.ifTopicEditingIndex &&

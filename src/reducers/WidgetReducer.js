@@ -33,7 +33,7 @@ const widgetReducer = (state = {widgets: widgets}, action) => {
                 })
             }
 
-        case "FIND_ALL_WIDGETS_FOR_TOPIC":
+        case FIND_ALL_WIDGETS_FOR_TOPIC:
             return {
                 widgets: action.widgets
             }
