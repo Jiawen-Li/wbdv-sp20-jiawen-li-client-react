@@ -3,6 +3,8 @@ import {connect} from "react-redux";
 import HeadingWidget from "./Widgets/HeadingWidget";
 import ParagraphWidget from "./Widgets/ParagraphWidget";
 import Widget from "./Widgets/WidgetList";
+import {FIND_ALL_WIDGETS_FOR_TOPIC} from "../../actions/widgetActions";
+import {WIDGET_SERVICE_URL} from "../../constants";
 
 class WidgetListComponent extends React.Component {
     componentDidMount() {
@@ -17,31 +19,42 @@ class WidgetListComponent extends React.Component {
     // }
 
     state = {
+        editing:false,
         widget: {}
     }
 
     save = () => {
         this.setState({
+            editing:false,
             widget: {}
         })
     }
+
+    save = () => {
+        this.setState(prev=>({
+            editing:!prev.editing,
+            widget: {}
+        }))
+    }
+
 
 
     render() {
         return (
             <div>
-                {this.props.widgets.length &&
+                {this.props.widgets &&
                 this.props.widgets.map(widget =>
                     <div key={widget.id}>
                         <Widget
                             save={this.save}
-                            editing={widget === this.state.widget}
+                            editing={this.state.editing}
                             deleteWidget={this.props.deleteWidget}
                             widget={widget}/>
 
                         {widget !== this.state.widget &&
                         <button onClick={() =>
                             this.setState({
+                                editing:true,
                                 widget: widget
                             })}>
                             ...
@@ -54,6 +67,10 @@ class WidgetListComponent extends React.Component {
                     this.props.createWidget(this.props.topicId)}>
                     +
                 </button>
+                <button onClick={() =>
+                    this.save()}>
+                    preview/ edit
+                </button>
             </div>
         )
     }
@@ -61,7 +78,7 @@ class WidgetListComponent extends React.Component {
 
 const dispatchToPropertyMapper = (dispatch) => ({
     createWidget: (tid) =>
-        fetch(`http://localhost:8080/api/topics/${tid}/widgets`, {
+        fetch(`${WIDGET_SERVICE_URL}/api/topics/${tid}/widgets`, {
             method: "POST",
             body: JSON.stringify({
                 id: Date.now().toString(),
@@ -76,7 +93,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 widget: actualWidget
             })),
     deleteWidget: (wid) =>
-        fetch(`http://localhost:8080/api/widgets/${wid}`, {
+        fetch(`${WIDGET_SERVICE_URL}/api/widgets/${wid}`, {
             method: "DELETE"
         })
             .then(response => response.json())
@@ -84,16 +101,18 @@ const dispatchToPropertyMapper = (dispatch) => ({
                 type: "DELETE_WIDGET",
                 widgetId: wid
             })),
+
     findWidgetsForTopic: (tid) =>
-        fetch(`http://localhost:8080/api/topics/${tid}/widgets`)
+        fetch(`${WIDGET_SERVICE_URL}/api/topics/${tid}/widgets`)
             .then(response => response.json())
             .then(widgets => dispatch({
-                type: "FIND_WIDGETS_FOR_TOPIC",
+                type: FIND_ALL_WIDGETS_FOR_TOPIC,
                 widgets: widgets
             })),
+
     findAllWidgets: () =>
         // TODO: create a widget service
-        fetch("http://localhost:8080/api/widgets")
+        fetch('${WIDGET_SERVICE_URL}/api/widgets')
             .then(response => response.json())
             .then(widgets => dispatch({
                 type: "FIND_ALL_WIDGETS",

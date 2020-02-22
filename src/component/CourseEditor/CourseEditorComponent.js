@@ -19,7 +19,7 @@ const rootReducer = combineReducers({
     widgets: widgetReducer
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =>
     <Provider store={store}>
@@ -30,25 +30,25 @@ const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =
 
             <div className="row">
                 <div className="col-4">
-                    {/*<ModuleListComponent*/}
-                    {/*    match={match}*/}
-                    {/*    courseId={courseId}/>*/}
+                    <ModuleListComponent
+                        match={match}
+                        courseId={courseId}/>
                 </div>
                 <div className="col-4">
-                    {/*{match.params.moduleId &&*/}
-                    {/*<LessonTabs*/}
-                    {/*    moduleId={moduleId}*/}
-                    {/*    match={match}/>*/}
-                    {/*}*/}
+                    {match.params.moduleId &&
+                    <LessonTabs
+                        moduleId={moduleId}
+                        match={match}/>
+                    }
 
-                    {/*{match.params.lessonId &&*/}
-                    {/*<TopicPills*/}
-                    {/*    match={match}*/}
-                    {/*    lessonId={lessonId}*/}
-                    {/*    moduleId={moduleId}*/}
-                    {/*    courseId={courseId}/>*/}
+                    {match.params.lessonId &&
+                    <TopicPills
+                        match={match}
+                        lessonId={lessonId}
+                        moduleId={moduleId}
+                        courseId={courseId}/>
 
-                    {/*}*/}
+                    }
 
                     {match.params.topicId &&
                     <WidgetListComponent

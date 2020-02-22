@@ -1,29 +1,28 @@
 import React from "react";
+import {connect} from "react-redux";
+import {updateWidget} from "../../../actions/widgetActions";
 
-export default class HeadingWidget extends React.Component {
+class HeadingWidget extends React.Component {
 
-    state  = {
+    state = {
         widget: this.props.widget
     }
 
     render() {
-        return(
+        return (
             <div>
                 {
                     this.props.editing &&
                     <div>
                         <input
                             onChange={(e) => {
-                                const newTitle = e.target.value;
-                                this.setState(prevState => ({
-                                    widget: {
-                                        ...prevState.widget,
-                                        title: newTitle
-                                    }
-                                }))
+                                this.props.updateWidget(this.props.widget.id, {
+                                    ...this.props.widget,
+                                    value: e.target.value
+                                })
                             }
                             }
-                            value={this.state.widget.title}/>
+                            value={this.props.widget.value}/>
                         <select
                             onChange={(e) => {
                                 let newSize = e.target.value
@@ -42,17 +41,43 @@ export default class HeadingWidget extends React.Component {
                             <option value={4}>Heading 4</option>
                             <option value={5}>Heading 5</option>
                         </select>
+                        <select
+                            onChange={(e) => {
+                                let newType = e.target.value
+                                this.props.updateWidget(this.props.widget.id,{
+                                    ...this.props.widget,
+                                    type: newType
+                                })
+                            }}
+                            value={this.state.widget.type}>
+                            <option value={"HEADING"}>Heading</option>
+                            <option value={"PARAGRAPH"}>Paragraph</option>
+
+                        </select>
                     </div>
                 }
                 {
                     !this.props.editing &&
                     <span>
-                        {this.state.widget.size === 1 && <h1>{this.state.widget.title}</h1>}
-                        {this.state.widget.size === 2 && <h2>{this.state.widget.title}</h2>}
-                        {this.state.widget.size === 3 && <h3>{this.state.widget.title}</h3>}
+                        {this.state.widget.size === 1 && <h1>{this.state.widget.value}</h1>}
+                        {this.state.widget.size === 2 && <h2>{this.state.widget.value}</h2>}
+                        {this.state.widget.size === 3 && <h3>{this.state.widget.value}</h3>}
+                        {this.state.widget.size === 4 && <h4>{this.state.widget.value}</h4>}
+                        {this.state.widget.size === 5 && <h5>{this.state.widget.value}</h5>}
+                        {this.state.widget.size === 6 && <h6>{this.state.widget.value}</h6>}
                     </span>
                 }
             </div>
         )
     }
 }
+
+const dispatchToPropertyMapper = (dispatch) => ({
+    updateWidget: (wid, newWidget) => dispatch(updateWidget(wid, newWidget))
+})
+
+
+export default connect(
+    null,
+    dispatchToPropertyMapper)
+(HeadingWidget)

@@ -1,6 +1,7 @@
 import React from "react";
 import HeadingWidget from "./HeadingWidget";
 import ParagraphWidget from "./ParagraphWidget";
+import {updateWidget} from "../../../services/WidgetService";
 
 export default class Widget extends React.Component {
     render() {
@@ -24,8 +25,10 @@ export default class Widget extends React.Component {
                             this.props.deleteWidget(this.props.widget.id)}>
                             X
                         </button>
-                        <button onClick={() =>
-                            this.props.save()}>
+                        <button onClick={() =>{
+                            updateWidget(this.props.widget.id,this.props.widget);
+                            this.props.save()
+                        }}>
                             Save
                         </button>
                     </span>
