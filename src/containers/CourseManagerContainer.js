@@ -21,6 +21,7 @@ class CourseManagerContainer extends React.Component {
         })
     }
 
+
     toggle = () =>
         this.setState(prevState => {
             if (prevState.layout === 'table') {

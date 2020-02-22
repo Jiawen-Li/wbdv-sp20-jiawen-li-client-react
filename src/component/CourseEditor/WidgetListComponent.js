@@ -12,11 +12,11 @@ class WidgetListComponent extends React.Component {
         this.props.findWidgetsForTopic(this.props.topicId);
     }
 
-    // componentDidUpdate(prevProps, prevState, snapshot) {
-    //     if (prevProps.topicId !== this.props.topicId) {
-    //         this.props.findWidgetsForTopic(this.props.topicId);
-    //     }
-    // }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.topicId !== this.props.topicId) {
+            this.props.findWidgetsForTopic(this.props.topicId);
+        }
+    }
 
     state = {
         editing:false,
@@ -42,6 +42,7 @@ class WidgetListComponent extends React.Component {
     render() {
         return (
             <div>
+                <h2>Widget List</h2>
                 {this.props.widgets &&
                 this.props.widgets.map(widget =>
                     <div key={widget.id}>
