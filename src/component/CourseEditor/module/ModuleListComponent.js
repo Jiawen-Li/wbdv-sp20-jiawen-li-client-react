@@ -14,9 +14,9 @@ class ModuleListComponent extends React.Component {
         return (
             <ul>
                 {this.props.modules && this.props.modules.map((module, index) =>
-                    <li key={module._id}>
+                    <li key={module.id}>
                         <button onClick={
-                            () => this.props.deleteModule(module._id)}>
+                            () => this.props.deleteModule(module.id)}>
                             Delete
                         </button>
                         {index !== this.props.ifModuleEditingIndex &&
@@ -25,7 +25,7 @@ class ModuleListComponent extends React.Component {
                                 () => this.props.editModule(index, module.title)}>
                                 Edit
                             </button>
-                            <Link to={`/course-editor/${this.props.match.params.courseId}/module/${module._id}`}>
+                            <Link to={`/course-editor/${this.props.match.params.courseId}/module/${module.id}`}>
                                 {module.title}
                             </Link>
                         </>}
@@ -35,7 +35,7 @@ class ModuleListComponent extends React.Component {
                             <button onClick={
                                 () =>
                                     this.props.saveModule(
-                                        module._id,
+                                        module.id,
                                         {"title":this.props.moduleEditingContent}
                                     )
                             }>

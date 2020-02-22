@@ -7,14 +7,14 @@ import Widget from "./Widgets/WidgetList";
 class WidgetListComponent extends React.Component {
     componentDidMount() {
         // this.props.findAllWidgets();
-        this.props.findWidgetForTopic(this.props.topicId);
+        this.props.findWidgetsForTopic(this.props.topicId);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if(prevProps.topicId !== this.props.topicId) {
-            this.props.findWidgetForTopic(this.props.topicId);
-        }
-    }
+    // componentDidUpdate(prevProps, prevState, snapshot) {
+    //     if (prevProps.topicId !== this.props.topicId) {
+    //         this.props.findWidgetsForTopic(this.props.topicId);
+    //     }
+    // }
 
     state = {
         widget: {}
@@ -28,27 +28,27 @@ class WidgetListComponent extends React.Component {
 
 
     render() {
-        return(
+        return (
             <div>
-                {
-                    this.props.widgets.map(widget =>
-                        <div key={widget.id}>
-                            <Widget
-                                save={this.save}
-                                editing={widget === this.state.widget}
-                                deleteWidget={this.props.deleteWidget}
-                                widget={widget}/>
+                {this.props.widgets.length &&
+                this.props.widgets.map(widget =>
+                    <div key={widget.id}>
+                        <Widget
+                            save={this.save}
+                            editing={widget === this.state.widget}
+                            deleteWidget={this.props.deleteWidget}
+                            widget={widget}/>
 
-                            {   widget !== this.state.widget &&
-                            <button onClick={() =>
-                                this.setState({
-                                    widget: widget
-                                })}>
-                                ...
-                            </button>
-                            }
-                        </div>
-                    )
+                        {widget !== this.state.widget &&
+                        <button onClick={() =>
+                            this.setState({
+                                widget: widget
+                            })}>
+                            ...
+                        </button>
+                        }
+                    </div>
+                )
                 }
                 <button onClick={() =>
                     this.props.createWidget(this.props.topicId)}>
@@ -64,7 +64,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
         fetch(`http://localhost:8080/api/topics/${tid}/widgets`, {
             method: "POST",
             body: JSON.stringify({
-                id: (new Date()).getTime()+"",
+                id: Date.now().toString(),
                 title: "New Widget"
             }),
             headers: {

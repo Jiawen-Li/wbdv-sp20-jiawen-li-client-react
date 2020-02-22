@@ -8,11 +8,15 @@ import {Provider} from "react-redux";
 import moduleReducer from "../../reducers/moduleReducer";
 import lessonReducer from "../../reducers/lessonReducer";
 import topicReducer from "../../reducers/topicReducer";
+import WidgetList from "./Widgets/WidgetList";
+import WidgetListComponent from "./WidgetListComponent";
+import widgetReducer from "../../reducers/WidgetReducer";
 
 const rootReducer = combineReducers({
     modules: moduleReducer,
     lessons: lessonReducer,
-    topics: topicReducer
+    topics: topicReducer,
+    widgets: widgetReducer
 })
 
 const store = createStore(rootReducer)
@@ -26,30 +30,30 @@ const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =
 
             <div className="row">
                 <div className="col-4">
-                    <ModuleListComponent
-                        match={match}
-                        courseId={courseId}/>
+                    {/*<ModuleListComponent*/}
+                    {/*    match={match}*/}
+                    {/*    courseId={courseId}/>*/}
                 </div>
                 <div className="col-4">
-                    {match.params.moduleId &&
-                    <LessonTabs
-                        moduleId={moduleId}
-                        match={match}/>
-                    }
+                    {/*{match.params.moduleId &&*/}
                     {/*<LessonTabs*/}
                     {/*    moduleId={moduleId}*/}
+                    {/*    match={match}/>*/}
+                    {/*}*/}
+
+                    {/*{match.params.lessonId &&*/}
+                    {/*<TopicPills*/}
+                    {/*    match={match}*/}
+                    {/*    lessonId={lessonId}*/}
+                    {/*    moduleId={moduleId}*/}
                     {/*    courseId={courseId}/>*/}
-                    {match.params.lessonId &&
-                    <TopicPills
+
+                    {/*}*/}
+
+                    {match.params.topicId &&
+                    <WidgetListComponent
                         match={match}
-                        lessonId={lessonId}
-                        moduleId={moduleId}
-                        courseId={courseId}/>
-                    }
-
-
-
-
+                        topicId={match.params.topicId}/>}
                 </div>
             </div>
         </div>
