@@ -6,12 +6,15 @@ import {Link} from "react-router-dom";
 
 
 class LessonListComponent extends React.Component {
+
+
     componentDidMount() {
         this.props.findLessonForModule(this.props.match.params.moduleId)
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.moduleId !== this.props.match.params.moduleId) {
+
+        if (prevProps.match.params.moduleId !== this.props.match.params.moduleId) {
             this.props.findLessonForModule(this.props.match.params.moduleId);
         }
 

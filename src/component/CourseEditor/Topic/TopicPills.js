@@ -11,7 +11,7 @@ class TopicListComponent extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.lessonId !== this.props.match.params.lessonId) {
+        if (prevProps.match.params.lessonId !== this.props.match.params.lessonId) {
             this.props.findTopicForLesson(this.props.match.params.lessonId);
         }
 
