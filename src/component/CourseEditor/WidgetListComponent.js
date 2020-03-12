@@ -5,10 +5,11 @@ import ParagraphWidget from "./Widgets/ParagraphWidget";
 import Widget from "./Widgets/WidgetList";
 import {FIND_ALL_WIDGETS_FOR_TOPIC} from "../../actions/widgetActions";
 import {WIDGET_SERVICE_URL} from "../../constants";
+import * as widgetService from "../../services/WidgetService";
+import * as widgetAction from '../../actions/widgetActions'
 
 class WidgetListComponent extends React.Component {
     componentDidMount() {
-        // this.props.findAllWidgets();
         this.props.findWidgetsForTopic(this.props.topicId);
     }
 
@@ -23,12 +24,12 @@ class WidgetListComponent extends React.Component {
         widget: {}
     }
 
-    save = () => {
-        this.setState({
-            editing:false,
-            widget: {}
-        })
-    }
+    // save = () => {
+    //     this.setState({
+    //         editing:false,
+    //         widget: {}
+    //     })
+    // }
 
     save = () => {
         this.setState(prev=>({
@@ -36,8 +37,6 @@ class WidgetListComponent extends React.Component {
             widget: {}
         }))
     }
-
-
 
     render() {
         return (
@@ -79,46 +78,26 @@ class WidgetListComponent extends React.Component {
 
 const dispatchToPropertyMapper = (dispatch) => ({
     createWidget: (tid) =>
-        fetch(`${WIDGET_SERVICE_URL}/api/topics/${tid}/widgets`, {
-            method: "POST",
-            body: JSON.stringify({
-                id: Date.now().toString(),
-                title: "New Widget"
-            }),
-            headers: {
-                'content-type': 'application/json'
-            }
-        }).then(response => response.json())
-            .then(actualWidget => dispatch({
-                type: "CREATE_WIDGET",
-                widget: actualWidget
-            })),
+       widgetService.createWidget(tid)
+            .then(actualWidget => dispatch(widgetAction.createWidget(actualWidget))),
+
     deleteWidget: (wid) =>
-        fetch(`${WIDGET_SERVICE_URL}/api/widgets/${wid}`, {
-            method: "DELETE"
-        })
-            .then(response => response.json())
-            .then(status => dispatch({
-                type: "DELETE_WIDGET",
-                widgetId: wid
-            })),
+        widgetService.deleteWidget(wid)
+            .then(status => dispatch(widgetAction.deleteWidget(wid))),
 
     findWidgetsForTopic: (tid) =>
-        fetch(`${WIDGET_SERVICE_URL}/api/topics/${tid}/widgets`)
-            .then(response => response.json())
-            .then(widgets => dispatch({
-                type: FIND_ALL_WIDGETS_FOR_TOPIC,
-                widgets: widgets
-            })),
+        widgetService.findWidgetsForTopic(tid)
+            .then(widgets => console.log(widgets)
+                // dispatch(widgetAction.findWidgetForTopic(widgets))
+            ),
 
-    findAllWidgets: () =>
-        // TODO: create a widget service
-        fetch('${WIDGET_SERVICE_URL}/api/widgets')
-            .then(response => response.json())
-            .then(widgets => dispatch({
-                type: "FIND_ALL_WIDGETS",
-                widgets: widgets
-            }))
+    // findAllWidgets: () =>
+    //     fetch('${WIDGET_SERVICE_URL}/api/widgets')
+    //         .then(response => response.json())
+    //         .then(widgets => dispatch({
+    //             type: "FIND_ALL_WIDGETS",
+    //             widgets: widgets
+    //         }))
 })
 
 const stateToPropertyMapper = (state) => ({
