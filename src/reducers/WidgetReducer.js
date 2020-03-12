@@ -18,7 +18,7 @@ const widgetReducer = (state = initialState, action) => {
             return {
                 widgets: [
                     ...state.widgets,
-                    action.widget
+                    action.newWidget
                 ]
             };
 

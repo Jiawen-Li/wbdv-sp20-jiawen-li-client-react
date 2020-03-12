@@ -87,8 +87,7 @@ const dispatchToPropertyMapper = (dispatch) => ({
 
     findWidgetsForTopic: (tid) =>
         widgetService.findWidgetsForTopic(tid)
-            .then(widgets => console.log(widgets)
-                // dispatch(widgetAction.findWidgetForTopic(widgets))
+            .then(widgets => dispatch(widgetAction.findWidgetForTopic(widgets))
             ),
 
     // findAllWidgets: () =>

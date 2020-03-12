@@ -23,9 +23,9 @@ class TopicListComponent extends React.Component {
                 <h2>Topic Pill Part</h2>
                 <ul>
                     {this.props.topics && this.props.topics.map((topic, index) =>
-                        <li key={topic._id}>
+                        <li key={topic.id}>
                             <button onClick={
-                                () => this.props.deleteTopic(topic._id)}>
+                                () => this.props.deleteTopic(topic.id)}>
                                 Delete
                             </button>
                             {index !== this.props.ifTopicEditingIndex &&
@@ -34,7 +34,7 @@ class TopicListComponent extends React.Component {
                                     () => this.props.editTopic(index, topic.title)}>
                                     Edit
                                 </button>
-                                <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${this.props.match.params.lessonId}/topic/${topic._id}`}>
+                                <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${this.props.match.params.lessonId}/topic/${topic.id}`}>
                                     {topic.title}
                                 </Link>
                             </>}
