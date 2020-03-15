@@ -24,9 +24,40 @@ const store = createStore(rootReducer,window.__REDUX_DEVTOOLS_EXTENSION__ && win
 const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =>
     <Provider store={store}>
         <div>
-            <Link to="/">Back</Link>
-            <button onClick={() => history.push("/")}>Close</button>
-            <h3>Course Editor {courseId}</h3>
+            <table class = 'table'>
+                <thead class = 'thead-dark'>
+                    <tr>
+                        <th scope = 'col'>
+                            <button onClick={() => history.push("/")}><i className="fas fa-times"></i></button>
+                        </th>
+                        <th>
+                            Course Info for Course_ID =  {courseId}
+                        </th>
+                        <th>
+                            <span style={{'color': 'gray'}}>Build</span>
+                        </th>
+                        <th>
+                            <span>Pages</span>
+                        </th>
+                        <th>
+                            <span style={{'color': 'gray'}}>Theme</span>
+                        </th>
+                        <th>
+                            <span style={{'color': 'gray'}}>Store</span>
+                        </th>
+                        <th>
+                            <span style={{'color': 'gray'}}>Apps</span>
+                        </th>
+                        <th>
+                            <span style={{'color': 'gray'}}>Settings</span>
+                        </th>
+                        <th>
+                            <span><i className="fas fa-plus"></i></span>
+                        </th>
+                    </tr>
+                </thead>
+            </table>
+
 
             <div className="row">
                 <div className="col-4">

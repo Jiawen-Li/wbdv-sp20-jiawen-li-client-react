@@ -139,7 +139,7 @@ class CourseManagerContainer extends React.Component {
         return (
             <div>
 
-                <h1>Course Manager</h1>
+                <h1>Course Manager System</h1>
 
                 <Router>
 
