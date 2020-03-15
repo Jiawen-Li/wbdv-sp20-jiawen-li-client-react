@@ -58,7 +58,6 @@ const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =
                 </thead>
             </table>
 
-
             <div className="row">
                 <div className="col-4">
                     <ModuleListComponent
@@ -86,6 +85,7 @@ const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =
                         match={match}
                         topicId={match.params.topicId}/>}
                 </div>
+
             </div>
         </div>
     </Provider>
