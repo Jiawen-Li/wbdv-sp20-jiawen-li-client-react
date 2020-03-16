@@ -16,9 +16,9 @@ class ModuleListComponent extends React.Component {
                 <div class={'col-5'}>
                     <div class={'row'}>
                         {this.props.modules && this.props.modules.map((module, index) =>
-                            <li key={module.id}>
+                            <li key={module._id}>
                                 <button onClick={
-                                    () => this.props.deleteModule(module.id)}>
+                                    () => this.props.deleteModule(module._id)}>
                                     <i className="fas fa-trash-alt"></i>
                                 </button>
                                 {index !== this.props.ifModuleEditingIndex &&
@@ -27,7 +27,7 @@ class ModuleListComponent extends React.Component {
                                         () => this.props.editModule(index, module.title)}>
                                         <i className="fas fa-pencil-alt"></i>
                                     </button>
-                                    <Link to={`/course-editor/${this.props.match.params.courseId}/module/${module.id}`}>
+                                    <Link to={`/course-editor/${this.props.match.params.courseId}/module/${module._id}`}>
                                         {module.title}
                                     </Link>
                                 </>}
@@ -37,7 +37,7 @@ class ModuleListComponent extends React.Component {
                                     <button onClick={
                                         () =>
                                             this.props.saveModule(
-                                                module.id,
+                                                module._id,
                                                 {"title":this.props.moduleEditingContent}
                                             )
                                     }>

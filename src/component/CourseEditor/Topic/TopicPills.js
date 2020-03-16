@@ -20,49 +20,51 @@ class TopicListComponent extends React.Component {
     render() {
         return (
             <>
-                <h2>Topic Pill Part</h2>
-                <ul>
-                    {this.props.topics && this.props.topics.map((topic, index) =>
-                        <li key={topic.id}>
-                            <button onClick={
-                                () => this.props.deleteTopic(topic.id)}>
-                                Delete
-                            </button>
-                            {index !== this.props.ifTopicEditingIndex &&
-                            <>
+                <h2>Topic For This Lesson</h2>
+                <div>
+                    <div class={'row'}>
+                        {this.props.topics && this.props.topics.map((topic, index) =>
+                            <li key={topic.id}>
                                 <button onClick={
-                                    () => this.props.editTopic(index, topic.title)}>
-                                    Edit
+                                    () => this.props.deleteTopic(topic.id)}>
+                                    Delete
                                 </button>
-                                <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${this.props.match.params.lessonId}/topic/${topic.id}`}>
-                                    {topic.title}
-                                </Link>
-                            </>}
+                                {index !== this.props.ifTopicEditingIndex &&
+                                <>
+                                    <button onClick={
+                                        () => this.props.editTopic(index, topic.title)}>
+                                        Edit
+                                    </button>
+                                    <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${this.props.match.params.lessonId}/topic/${topic.id}`}>
+                                        {topic.title}
+                                    </Link>
+                                </>}
 
-                            {index == this.props.ifTopicEditingIndex &&
-                            <>
-                                <button onClick={
-                                    () =>
-                                        this.props.saveTopic(
-                                            topic._id,
-                                            {"title": this.props.topicEditingContent}
-                                        )
-                                }>
-                                    save
-                                </button>
-                                <input value={this.props.topicEditingContent}
-                                       onChange={event => this.props.changeTopic(event.target.value)}/>
-                            </>
-                            }
+                                {index == this.props.ifTopicEditingIndex &&
+                                <>
+                                    <button onClick={
+                                        () =>
+                                            this.props.saveTopic(
+                                                topic._id,
+                                                {"title": this.props.topicEditingContent}
+                                            )
+                                    }>
+                                        save
+                                    </button>
+                                    <input value={this.props.topicEditingContent}
+                                           onChange={event => this.props.changeTopic(event.target.value)}/>
+                                </>
+                                }
+                            </li>
+                        )}
+                        <li>
+                            <button onClick={
+                                () => this.props.createTopic(this.props.match.params.lessonId)}>
+                                Create
+                            </button>
                         </li>
-                    )}
-                    <li>
-                        <button onClick={
-                            () => this.props.createTopic(this.props.match.params.lessonId)}>
-                            Create
-                        </button>
-                    </li>
-                </ul>
+                    </div>
+                </div>
             </>
 
         );
