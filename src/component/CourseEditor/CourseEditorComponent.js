@@ -58,34 +58,35 @@ const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =
                 </thead>
             </table>
 
-            <div className="row">
-                <div className="col-4">
-                    <ModuleListComponent
-                        match={match}
-                        courseId={courseId}/>
+            <div class={'container'}>
+                <div className="row">
+                    <div className="col-5">
+                        <ModuleListComponent
+                            match={match}
+                            courseId={courseId}/>
+                    </div>
+                    <div className="col-4">
+                        {match.params.moduleId &&
+                        <LessonTabs
+                            moduleId={moduleId}
+                            match={match}/>
+                        }
+
+                        {match.params.lessonId &&
+                        <TopicPills
+                            match={match}
+                            lessonId={lessonId}
+                            moduleId={moduleId}
+                            courseId={courseId}/>
+
+                        }
+
+                        {match.params.topicId &&
+                        <WidgetListComponent
+                            match={match}
+                            topicId={match.params.topicId}/>}
+                    </div>
                 </div>
-                <div className="col-4">
-                    {match.params.moduleId &&
-                    <LessonTabs
-                        moduleId={moduleId}
-                        match={match}/>
-                    }
-
-                    {match.params.lessonId &&
-                    <TopicPills
-                        match={match}
-                        lessonId={lessonId}
-                        moduleId={moduleId}
-                        courseId={courseId}/>
-
-                    }
-
-                    {match.params.topicId &&
-                    <WidgetListComponent
-                        match={match}
-                        topicId={match.params.topicId}/>}
-                </div>
-
             </div>
         </div>
     </Provider>
