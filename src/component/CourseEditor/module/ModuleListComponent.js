@@ -12,7 +12,7 @@ class ModuleListComponent extends React.Component {
 
     render() {
         return (
-            <div class={'list-group'}>
+            <div class={'list-group col-6'}>
                 {this.props.modules && this.props.modules.map((module, index) =>
                     <li class="list-group-item" key={module._id}>
                         <button onClick={
