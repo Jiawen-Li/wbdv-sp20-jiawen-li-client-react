@@ -22,11 +22,11 @@ class LessonListComponent extends React.Component {
 
     render() {
         return (
-            <div class={'container'}>
-                <div class={'col'}>
+            <div>
+                <div class={'row'}>
 
                     {this.props.lessons && this.props.lessons.map((lesson, index) =>
-                        <li key={lesson._id}>
+                        <div class={'col-3'} key={lesson._id}>
                             <button onClick={
                                 () => this.props.deleteLesson(lesson._id)}>
                                 <i className="fas fa-trash-alt"></i>
@@ -54,17 +54,18 @@ class LessonListComponent extends React.Component {
                                     save
                                 </button>
                                 <input value={this.props.lessonEditingContent}
-                                       onChange={event => this.props.changeLesson(event.target.value)}/>
+                                       onChange={event => this.props.changeLesson(event.target.value)}
+                                       size={10}/>
                             </>
                             }
-                        </li>
+                        </div>
                     )}
-                    <li>
+                    <div class={'col'}>
                         <button onClick={
                             () => this.props.createLesson(this.props.match.params.moduleId)}>
                             Create
                         </button>
-                    </li>
+                    </div>
 
                 </div>
             </div>
