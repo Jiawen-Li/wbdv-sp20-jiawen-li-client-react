@@ -13,7 +13,7 @@ class ModuleListComponent extends React.Component {
     render() {
         return (
             <div class={'container'}>
-                <div class={'col-6'}>
+                <div class={'col-5'}>
                     <div class={'row'}>
                         {this.props.modules && this.props.modules.map((module, index) =>
                             <li key={module.id}>
