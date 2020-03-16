@@ -19,13 +19,13 @@ class ModuleListComponent extends React.Component {
                             <li key={module.id}>
                                 <button onClick={
                                     () => this.props.deleteModule(module.id)}>
-                                    Delete
+                                    <i className="fas fa-trash-alt"></i>
                                 </button>
                                 {index !== this.props.ifModuleEditingIndex &&
                                 <>
                                     <button onClick={
                                         () => this.props.editModule(index, module.title)}>
-                                        Edit
+                                        <i className="fas fa-pencil-alt"></i>
                                     </button>
                                     <Link to={`/course-editor/${this.props.match.params.courseId}/module/${module.id}`}>
                                         {module.title}

@@ -22,48 +22,52 @@ class LessonListComponent extends React.Component {
 
     render() {
         return (
-            <ul>
-                {this.props.lessons && this.props.lessons.map((lesson, index) =>
-                    <li key={lesson._id}>
-                        <button onClick={
-                            () => this.props.deleteLesson(lesson._id)}>
-                            Delete
-                        </button>
-                        {index !== this.props.ifLessonEditingIndex &&
-                        <>
-                            <button onClick={
-                                () => this.props.editLesson(index, lesson.title)}>
-                                Edit
-                            </button>
-                            <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${lesson._id}`}>
-                                {lesson.title}
-                            </Link>
-                        </>}
+            <div class={'container'}>
+                <div class={'col'}>
 
-                        {index == this.props.ifLessonEditingIndex &&
-                        <>
+                    {this.props.lessons && this.props.lessons.map((lesson, index) =>
+                        <li key={lesson._id}>
                             <button onClick={
-                                () =>
-                                    this.props.saveLesson(
-                                        lesson._id,
-                                        {"title":this.props.lessonEditingContent}
-                                    )
-                            }>
-                                save
+                                () => this.props.deleteLesson(lesson._id)}>
+                                <i className="fas fa-trash-alt"></i>
                             </button>
-                            <input value={this.props.lessonEditingContent}
-                                   onChange={event => this.props.changeLesson(event.target.value)}/>
-                        </>
-                        }
+                            {index !== this.props.ifLessonEditingIndex &&
+                            <>
+                                <button onClick={
+                                    () => this.props.editLesson(index, lesson.title)}>
+                                    <i className="fas fa-pencil-alt"></i>
+                                </button>
+                                <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${lesson._id}`}>
+                                    {lesson.title}
+                                </Link>
+                            </>}
+
+                            {index == this.props.ifLessonEditingIndex &&
+                            <>
+                                <button onClick={
+                                    () =>
+                                        this.props.saveLesson(
+                                            lesson._id,
+                                            {"title":this.props.lessonEditingContent}
+                                        )
+                                }>
+                                    save
+                                </button>
+                                <input value={this.props.lessonEditingContent}
+                                       onChange={event => this.props.changeLesson(event.target.value)}/>
+                            </>
+                            }
+                        </li>
+                    )}
+                    <li>
+                        <button onClick={
+                            () => this.props.createLesson(this.props.match.params.moduleId)}>
+                            Create
+                        </button>
                     </li>
-                )}
-                <li>
-                    <button onClick={
-                        () => this.props.createLesson(this.props.match.params.moduleId)}>
-                        Create
-                    </button>
-                </li>
-            </ul>
+
+                </div>
+            </div>
         );
     }
 }
