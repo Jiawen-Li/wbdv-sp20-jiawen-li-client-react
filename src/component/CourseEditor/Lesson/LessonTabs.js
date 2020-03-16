@@ -22,53 +22,6 @@ class LessonListComponent extends React.Component {
 
     render() {
         return (
-            // <div>
-            //     <div class={'row'}>
-            //
-            //         {this.props.lessons && this.props.lessons.map((lesson, index) =>
-            //             <div class={'col-3'} key={lesson._id}>
-            //                 <button onClick={
-            //                     () => this.props.deleteLesson(lesson._id)}>
-            //                     <i className="fas fa-trash-alt"></i>
-            //                 </button>
-            //                 {index !== this.props.ifLessonEditingIndex &&
-            //                 <>
-            //                     <button onClick={
-            //                         () => this.props.editLesson(index, lesson.title)}>
-            //                         <i className="fas fa-pencil-alt"></i>
-            //                     </button>
-            //                     <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${lesson._id}`}>
-            //                         {lesson.title}
-            //                     </Link>
-            //                 </>}
-            //
-            //                 {index == this.props.ifLessonEditingIndex &&
-            //                 <>
-            //                     <button onClick={
-            //                         () =>
-            //                             this.props.saveLesson(
-            //                                 lesson._id,
-            //                                 {"title":this.props.lessonEditingContent}
-            //                             )
-            //                     }>
-            //                         save
-            //                     </button>
-            //                     <input value={this.props.lessonEditingContent}
-            //                            onChange={event => this.props.changeLesson(event.target.value)}
-            //                            size={10}/>
-            //                 </>
-            //                 }
-            //             </div>
-            //         )}
-            //         <div class={'col'}>
-            //             <button onClick={
-            //                 () => this.props.createLesson(this.props.match.params.moduleId)}>
-            //                 Create
-            //             </button>
-            //         </div>
-            //
-            //     </div>
-            // </div>
             <div class={'list-group list-group-horizontal'}>
                 {this.props.lessons && this.props.lessons.map((lesson, index) =>
                     <li class={'list-group-item col-4'} key={'lesson._id'}>
