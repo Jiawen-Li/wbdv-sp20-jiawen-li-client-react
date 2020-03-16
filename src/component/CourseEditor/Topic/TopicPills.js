@@ -24,16 +24,16 @@ class TopicListComponent extends React.Component {
                 <div>
                     <div class={'row'}>
                         {this.props.topics && this.props.topics.map((topic, index) =>
-                            <li key={topic.id}>
+                            <div class={'col-3'} key={topic.id}>
                                 <button onClick={
                                     () => this.props.deleteTopic(topic.id)}>
-                                    Delete
+                                    <i className="fas fa-trash-alt"></i>
                                 </button>
                                 {index !== this.props.ifTopicEditingIndex &&
                                 <>
                                     <button onClick={
                                         () => this.props.editTopic(index, topic.title)}>
-                                        Edit
+                                        <i className="fas fa-pencil-alt"></i>
                                     </button>
                                     <Link to={`/course-editor/${this.props.match.params.courseId}/module/${this.props.match.params.moduleId}/lesson/${this.props.match.params.lessonId}/topic/${topic.id}`}>
                                         {topic.title}
@@ -52,17 +52,18 @@ class TopicListComponent extends React.Component {
                                         save
                                     </button>
                                     <input value={this.props.topicEditingContent}
-                                           onChange={event => this.props.changeTopic(event.target.value)}/>
+                                           onChange={event => this.props.changeTopic(event.target.value)}
+                                           size={10}/>
                                 </>
                                 }
-                            </li>
+                            </div>
                         )}
-                        <li>
+                        <div class={'col'}>
                             <button onClick={
                                 () => this.props.createTopic(this.props.match.params.lessonId)}>
                                 Create
                             </button>
-                        </li>
+                        </div>
                     </div>
                 </div>
             </>

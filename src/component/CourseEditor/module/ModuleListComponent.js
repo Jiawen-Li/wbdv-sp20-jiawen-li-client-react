@@ -16,7 +16,7 @@ class ModuleListComponent extends React.Component {
                 <div class={'col-5'}>
                     <div class={'row'}>
                         {this.props.modules && this.props.modules.map((module, index) =>
-                            <li key={module._id}>
+                            <div key={module._id}>
                                 <button onClick={
                                     () => this.props.deleteModule(module._id)}>
                                     <i className="fas fa-trash-alt"></i>
@@ -47,7 +47,7 @@ class ModuleListComponent extends React.Component {
                                            onChange={event => this.props.changeModule(event.target.value)}/>
                                 </>
                                 }
-                            </li>
+                            </div>
                         )}
                     </div>
                 </div>
