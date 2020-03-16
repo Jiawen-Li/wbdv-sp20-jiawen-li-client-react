@@ -12,48 +12,55 @@ class ModuleListComponent extends React.Component {
 
     render() {
         return (
-            <ul>
-                {this.props.modules && this.props.modules.map((module, index) =>
-                    <li key={module.id}>
-                        <button onClick={
-                            () => this.props.deleteModule(module.id)}>
-                            Delete
-                        </button>
-                        {index !== this.props.ifModuleEditingIndex &&
-                        <>
-                            <button onClick={
-                                () => this.props.editModule(index, module.title)}>
-                                Edit
-                            </button>
-                            <Link to={`/course-editor/${this.props.match.params.courseId}/module/${module.id}`}>
-                                {module.title}
-                            </Link>
-                        </>}
+            <div class={'container'}>
+                <div class={'col-6'}>
+                    <div class={'row'}>
+                        {this.props.modules && this.props.modules.map((module, index) =>
+                            <li key={module.id}>
+                                <button onClick={
+                                    () => this.props.deleteModule(module.id)}>
+                                    Delete
+                                </button>
+                                {index !== this.props.ifModuleEditingIndex &&
+                                <>
+                                    <button onClick={
+                                        () => this.props.editModule(index, module.title)}>
+                                        Edit
+                                    </button>
+                                    <Link to={`/course-editor/${this.props.match.params.courseId}/module/${module.id}`}>
+                                        {module.title}
+                                    </Link>
+                                </>}
 
-                        {index == this.props.ifModuleEditingIndex &&
-                        <>
-                            <button onClick={
-                                () =>
-                                    this.props.saveModule(
-                                        module.id,
-                                        {"title":this.props.moduleEditingContent}
-                                    )
-                            }>
-                                save
-                            </button>
-                            <input value={this.props.moduleEditingContent}
-                                   onChange={event => this.props.changeModule(event.target.value)}/>
-                        </>
-                        }
-                    </li>
-                )}
-                <li>
-                    <button onClick={
-                        () => this.props.createModule(this.props.courseId)}>
-                        Create
-                    </button>
-                </li>
-            </ul>
+                                {index == this.props.ifModuleEditingIndex &&
+                                <>
+                                    <button onClick={
+                                        () =>
+                                            this.props.saveModule(
+                                                module.id,
+                                                {"title":this.props.moduleEditingContent}
+                                            )
+                                    }>
+                                        save
+                                    </button>
+                                    <input value={this.props.moduleEditingContent}
+                                           onChange={event => this.props.changeModule(event.target.value)}/>
+                                </>
+                                }
+                            </li>
+                        )}
+                    </div>
+                </div>
+
+                <div class={'col-6'}>
+                    <div class={'row justify-content-md-center'}>
+                        <button onClick={
+                            () => this.props.createModule(this.props.courseId)}>
+                            <i className="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
         );
     }
 }
