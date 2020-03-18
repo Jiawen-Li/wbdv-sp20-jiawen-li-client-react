@@ -11,10 +11,10 @@ class ListWidget extends React.Component {
                     <button><i className="fas fa-arrow-up"></i></button>
                     <button><i className="fas fa-arrow-down"></i></button>
                     <select value={'List'}>
-                        <option>Heading</option>
-                        <option>Paragraph</option>
-                        <option>List</option>
-                        <option>Image</option>
+                        <option value={'HEADING'}>Heading</option>
+                        <option value={'PARAGRAPH'}>Paragraph</option>
+                        <option value={'LIST'}>List</option>
+                        <option value={'IMAGE'}>Image</option>
                     </select>
                     <button><i className="fas fa-times"></i></button>
                 </div>
