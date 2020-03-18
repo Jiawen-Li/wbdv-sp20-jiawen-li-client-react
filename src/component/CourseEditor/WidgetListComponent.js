@@ -23,18 +23,11 @@ class WidgetListComponent extends React.Component {
     }
 
     state = {
-        editing:false,
+        editing:true,
         widget: {}
     }
 
-    // save = () => {
-    //     this.setState({
-    //         editing:false,
-    //         widget: {}
-    //     })
-    // }
-
-    save = () => {
+    view = () => {
         this.setState(prev=>({
             editing:!prev.editing,
             widget: {}
@@ -46,24 +39,24 @@ class WidgetListComponent extends React.Component {
         switch (widget.type) {
             case "HEADING":
                 return <HeadingWidget
-                    editing={this.props.editing}
-                    widget={this.props.widget}/>
+                    editing={this.stats.editing}
+                    widget={widget}/>
             case "PARAGRAPH":
                 return <ParagraphWidget
-                    editing={this.props.editing}
-                    widget={this.props.widget}/>
+                    editing={this.state.editing}
+                    widget={widget}/>
             case "LIST":
                 return <ListWidget
-                    editing={this.props.editing}
-                    widget={this.props.widget}/>
+                    editing={this.state.editing}
+                    widget={widget}/>
             case "IMAGE":
                 return <ImageWidget
-                    editing={this.props.editing}
-                    widget={this.props.widget}/>
+                    editing={this.state.editing}
+                    widget={widget}/>
             default:
                 return <HeadingWidget
-                    editing={this.props.editing}
-                    widget={this.props.widget}/>
+                    editing={this.state.editing}
+                    widget={widget}/>
         }
     }
 
@@ -74,23 +67,36 @@ class WidgetListComponent extends React.Component {
 
                 <div className={'row'} style={{'margin-bottom':'10px'}}>
 
-                    {   this.props.editing &&
+                    <button onClick={
+                        () => this.props.createWidget(this.props.match.params.topicId)}>
+                        <i className="fas fa-plus"></i>
+                    </button>
+
+                    {this.state.editing &&
                     <span>
                         <button type={'button'} className={'btn btn-success'}
                                 onClick={() =>{
-                                    updateWidget(this.props.widget.id,this.props.widget);
-                                    this.props.save()}}>Save</button>
+                                    this.props.widgets.map(widget=>updateWidget(widget.id,widget))}}>
+                            Save
+                        </button>
                     </span>}
 
                     <span style={{'margin-right':'10px','margin-left':'10px','margin-top':'8px'}}> Preview </span>
-                    <span style={{'margin-top':'8px'}}>
-                        <i className="fas fa-eye-slash"></i>
-                    </span>
+
+                    {/*{this.state.editing &&*/}
+                    {/*<span style={{'margin-top':'8px'}}>*/}
+                    {/*    <button type={'button'} className={'btn btn-success'}*/}
+                    {/*            onClick={() =>{*/}
+                    {/*                updateWidget(this.props.widget.id,this.props.widget);*/}
+                    {/*                this.save()}}><i className="fas fa-eye-slash"></i></button>*/}
+                    {/*</span>}*/}
+
                 </div>
+
                 <ul className={'list-group'} style={{'margin-bottom':'10px'}}>
-                {this.props.widgets &&
-                    this.props.widgets.map(widget=>this.widgetSwitch(widget))
-                }
+                    {this.props.widgets &&
+                        this.props.widgets.map(widget=>this.widgetSwitch(widget))
+                    }
                 </ul>
 
 

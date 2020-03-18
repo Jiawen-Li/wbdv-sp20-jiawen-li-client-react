@@ -4,46 +4,58 @@ import {updateWidget} from "../../../actions/widgetActions";
 
 class HeadingWidget extends React.Component {
 
-    state = {
-        widget: this.props.widget
-    }
+
+    editingView = () =>
+        <li className={'list-group-item'}>
+            <span><h4>Heading Widget</h4></span>
+            <div className={'row'}>
+                <button><i className="fas fa-arrow-up"></i></button>
+                <button><i className="fas fa-arrow-down"></i></button>
+                <select value={'Heading'}>
+                    <option>Heading</option>
+                    <option>Paragraph</option>
+                    <option>List</option>
+                    <option>Image</option>
+                </select>
+                <button><i className="fas fa-times"></i></button>
+            </div>
+            <div className={'row'} style={{'margin-bottom': '10px', 'margin-top': '10px'}}>
+                <input value={'Heading text'} style={{'width': '600px'}}/>
+            </div>
+            <div className={'row'} style={{'margin-bottom': '10px'}}>
+                <select value={'Heading 1'} style={{'width': '600px'}}>
+                    <option>Heading 1</option>
+                    <option>Heading 2</option>
+                    <option>Heading 3</option>
+                    <option>Heading 4</option>
+                </select>
+            </div>
+            <div className={'row'} style={{'margin-bottom': '10px'}}>
+                <input value={'Widget name'} style={{'width': '600px'}}/>
+            </div>
+            <div className={'row'} style={{'margin-bottom': '10px'}}>
+                <h4>Preview</h4>
+            </div>
+            <div className={'row'} style={{'margin-bottom': '10px'}}>
+                <h3>Heading text</h3>
+            </div>
+        </li>
+
+    preview = () =>
+        <div>
+            <h1>Preview</h1>
+
+            {/*{this.props.widget.value}*/}
+        </div>
 
     render() {
         return (
-            <li className={'list-group-item'}>
-                <span><h4>Heading Widget</h4></span>
-                <div className={'row'}>
-                    <button><i className="fas fa-arrow-up"></i></button>
-                    <button><i className="fas fa-arrow-down"></i></button>
-                    <select value={'Heading'}>
-                        <option>Heading</option>
-                        <option>Paragraph</option>
-                        <option>List</option>
-                        <option>Image</option>
-                    </select>
-                    <button><i className="fas fa-times"></i></button>
-                </div>
-                <div className={'row'} style={{'margin-bottom': '10px', 'margin-top': '10px'}}>
-                    <input value={'Heading text'} style={{'width': '600px'}}/>
-                </div>
-                <div className={'row'} style={{'margin-bottom': '10px'}}>
-                    <select value={'Heading 1'} style={{'width': '600px'}}>
-                        <option>Heading 1</option>
-                        <option>Heading 2</option>
-                        <option>Heading 3</option>
-                        <option>Heading 4</option>
-                    </select>
-                </div>
-                <div className={'row'} style={{'margin-bottom': '10px'}}>
-                    <input value={'Widget name'} style={{'width': '600px'}}/>
-                </div>
-                <div className={'row'} style={{'margin-bottom': '10px'}}>
-                    <h4>Preview</h4>
-                </div>
-                <div className={'row'} style={{'margin-bottom': '10px'}}>
-                    <h3>Heading text</h3>
-                </div>
-            </li>
+            <div>
+                {this.editingView()};
+                {!this.props.editing && this.preview()}
+            </div>
+
+
             // <div>
             //     {
             //         this.props.editing &&
@@ -103,6 +115,7 @@ class HeadingWidget extends React.Component {
             //     }
             // </div>
         )
+            ;
     }
 }
 
