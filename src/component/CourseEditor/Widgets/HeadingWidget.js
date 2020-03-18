@@ -6,7 +6,7 @@ class HeadingWidget extends React.Component {
 
 
     editingView = () =>
-        <li className={'list-group-item'}>
+        <>
             <span><h4>Heading Widget</h4></span>
             <div className={'row'}>
                 <button><i className="fas fa-arrow-up"></i></button>
@@ -33,13 +33,13 @@ class HeadingWidget extends React.Component {
             <div className={'row'} style={{'margin-bottom': '10px'}}>
                 <input value={'Widget name'} style={{'width': '600px'}}/>
             </div>
-            <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <h4>Preview</h4>
-            </div>
-            <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <h3>Heading text</h3>
-            </div>
-        </li>
+            {/*<div className={'row'} style={{'margin-bottom': '10px'}}>*/}
+            {/*    <h4>Preview</h4>*/}
+            {/*</div>*/}
+            {/*<div className={'row'} style={{'margin-bottom': '10px'}}>*/}
+            {/*    <h3>Heading text</h3>*/}
+            {/*</div>*/}
+        </>
 
     preview = () =>
         <div>
@@ -50,10 +50,10 @@ class HeadingWidget extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.editingView()};
+            <li className={'list-group-item'}>
+                {this.editingView()}
                 {!this.props.editing && this.preview()}
-            </div>
+            </li>
 
 
             // <div>

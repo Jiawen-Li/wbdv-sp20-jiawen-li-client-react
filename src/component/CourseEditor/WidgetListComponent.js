@@ -28,10 +28,10 @@ class WidgetListComponent extends React.Component {
     }
 
     view = () => {
-        this.setState(prev=>({
-            editing:!prev.editing,
+        this.setState({
+            editing:!this.state.editing,
             widget: {}
-        }))
+        })
     }
 
 
@@ -72,24 +72,25 @@ class WidgetListComponent extends React.Component {
                         <i className="fas fa-plus"></i>
                     </button>
 
-                    {this.state.editing &&
                     <span>
                         <button type={'button'} className={'btn btn-success'}
                                 onClick={() =>{
                                     this.props.widgets.map(widget=>updateWidget(widget.id,widget))}}>
                             Save
                         </button>
+                    </span>
+
+                    {this.state.editing &&
+                    <span style={{'margin-top':'8px'}}>
+                        <button onClick={() =>{
+                                    this.view()}}>Preview</button>
                     </span>}
 
-                    <span style={{'margin-right':'10px','margin-left':'10px','margin-top':'8px'}}> Preview </span>
-
-                    {/*{this.state.editing &&*/}
-                    {/*<span style={{'margin-top':'8px'}}>*/}
-                    {/*    <button type={'button'} className={'btn btn-success'}*/}
-                    {/*            onClick={() =>{*/}
-                    {/*                updateWidget(this.props.widget.id,this.props.widget);*/}
-                    {/*                this.save()}}><i className="fas fa-eye-slash"></i></button>*/}
-                    {/*</span>}*/}
+                    {!this.state.editing &&
+                    <span style={{'margin-top':'8px'}}>
+                        <button onClick={() =>{
+                            this.view()}}>Edit</button>
+                    </span>}
 
                 </div>
 
@@ -100,16 +101,16 @@ class WidgetListComponent extends React.Component {
                 </ul>
 
 
-                <div className={'row'} style={{'margin-bottom':'10px'}}>
-                    {this.props.editing &&
-                    <span>
-                            <button onClick={() =>
-                                this.props.deleteWidget(this.props.widget.id)}>
-                                <i className="fas fa-window-close"></i>
-                            </button>
-                    </span>
-                    }
-                </div>
+                {/*<div className={'row'} style={{'margin-bottom':'10px'}}>*/}
+                {/*    {this.props.editing &&*/}
+                {/*    <span>*/}
+                {/*            <button onClick={() =>*/}
+                {/*                this.props.deleteWidget(this.props.widget.id)}>*/}
+                {/*                <i className="fas fa-window-close"></i>*/}
+                {/*            </button>*/}
+                {/*    </span>*/}
+                {/*    }*/}
+                {/*</div>*/}
 
 
             </div>
