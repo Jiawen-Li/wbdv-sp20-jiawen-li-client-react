@@ -99,20 +99,6 @@ class WidgetListComponent extends React.Component {
                         this.props.widgets.map(widget=>this.widgetSwitch(widget))
                     }
                 </ul>
-
-
-                {/*<div className={'row'} style={{'margin-bottom':'10px'}}>*/}
-                {/*    {this.props.editing &&*/}
-                {/*    <span>*/}
-                {/*            <button onClick={() =>*/}
-                {/*                this.props.deleteWidget(this.props.widget.id)}>*/}
-                {/*                <i className="fas fa-window-close"></i>*/}
-                {/*            </button>*/}
-                {/*    </span>*/}
-                {/*    }*/}
-                {/*</div>*/}
-
-
             </div>
         )
     }
