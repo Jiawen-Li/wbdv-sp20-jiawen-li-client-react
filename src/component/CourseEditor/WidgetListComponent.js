@@ -8,6 +8,8 @@ import {WIDGET_SERVICE_URL} from "../../constants";
 import * as widgetService from "../../services/WidgetService";
 import * as widgetAction from '../../actions/widgetActions'
 import {updateWidget} from "../../services/WidgetService";
+import ListWidget from "./Widgets/ListWidget";
+import ImageWidget from "./Widgets/ImageWidget";
 
 class WidgetListComponent extends React.Component {
     componentDidMount() {
@@ -43,33 +45,68 @@ class WidgetListComponent extends React.Component {
         return (
             <div>
                 <h2>Widget List</h2>
+
                 <div className={'row'} style={{'margin-bottom':'10px'}}>
+
+                    {   this.props.editing &&
                     <span>
-                        <button type={'button'} className={'btn btn-success'}>Save</button>
-                    </span>
+                        <button type={'button'} className={'btn btn-success'}
+                                onClick={() =>{
+                                    updateWidget(this.props.widget.id,this.props.widget);
+                                    this.props.save()}}>Save</button>
+                    </span>}
+
                     <span style={{'margin-right':'10px','margin-left':'10px','margin-top':'8px'}}> Preview </span>
                     <span style={{'margin-top':'8px'}}>
                         <i className="fas fa-eye-slash"></i>
                     </span>
                 </div>
-                <ul className={'list-group'}>
+
+                <ul className={'list-group'} style={{'margin-bottom':'10px'}}>
+
+                    {
+                        this.props.widget.type === "HEADING" &&
+                        <HeadingWidget
+                            editing={this.props.editing}
+                            widget={this.props.widget}/>
+                    }
+
+                    {
+                        this.props.widget.type === "PARAGRAPH" &&
+                        <ParagraphWidget
+                            editing={this.props.editing}
+                            widget={this.props.widget}/>
+                    }
+
+                    {
+                        this.props.widget.type === "LIST" &&
+                        <ListWidget
+                            editing={this.props.editing}
+                            widget={this.props.widget}/>
+                    }
+
+                    {
+                        this.props.widget.type === "IMAGE" &&
+                        <ImageWidget
+                            editing={this.props.editing}
+                            widget={this.props.widget}/>
+                    }
 
                 </ul>
 
+                <div className={'row'} style={{'margin-bottom':'10px'}}>
+                    {this.props.editing &&
+                    <span>
+                            <button onClick={() =>
+                                this.props.deleteWidget(this.props.widget.id)}>
+                                <i className="fas fa-window-close"></i>
+                            </button>
+                    </span>
+                    }
+                </div>
 
-                {/*<div>*/}
-                {/*    {*/}
-                {/*        this.props.widget.type === "HEADING" &&*/}
-                {/*        <HeadingWidget*/}
-                {/*            editing={this.props.editing}*/}
-                {/*            widget={this.props.widget}/>*/}
-                {/*    }*/}
-                {/*    {*/}
-                {/*        this.props.widget.type === "PARAGRAPH" &&*/}
-                {/*        <ParagraphWidget*/}
-                {/*            editing={this.props.editing}*/}
-                {/*            widget={this.props.widget}/>*/}
-                {/*    }*/}
+
+
                 {/*    {   this.props.editing &&*/}
                 {/*    <span>*/}
                 {/*        <button onClick={() =>*/}
