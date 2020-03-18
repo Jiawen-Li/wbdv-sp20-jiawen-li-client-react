@@ -8,7 +8,7 @@ import {Provider} from "react-redux";
 import moduleReducer from "../../reducers/moduleReducer";
 import lessonReducer from "../../reducers/lessonReducer";
 import topicReducer from "../../reducers/topicReducer";
-import WidgetList from "./Widgets/WidgetList";
+import Widget from "../CourseEditor/Widgets/WidgetList";
 import WidgetListComponent from "./WidgetListComponent";
 import widgetReducer from "../../reducers/WidgetReducer";
 
@@ -65,7 +65,7 @@ const CourseEditorComponent = ({history, courseId, match, moduleId, lessonId}) =
                             match={match}
                             courseId={courseId}/>
                     </div>
-                    <div className="col-4">
+                    <div className="col-7">
                         {match.params.moduleId &&
                         <LessonTabs
                             moduleId={moduleId}

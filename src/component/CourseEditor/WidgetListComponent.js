@@ -2,11 +2,12 @@ import React from "react";
 import {connect} from "react-redux";
 import HeadingWidget from "./Widgets/HeadingWidget";
 import ParagraphWidget from "./Widgets/ParagraphWidget";
-import Widget from "./Widgets/WidgetList";
+import Widget from "../CourseEditor/Widgets/WidgetList";
 import {FIND_ALL_WIDGETS_FOR_TOPIC} from "../../actions/widgetActions";
 import {WIDGET_SERVICE_URL} from "../../constants";
 import * as widgetService from "../../services/WidgetService";
 import * as widgetAction from '../../actions/widgetActions'
+import {updateWidget} from "../../services/WidgetService";
 
 class WidgetListComponent extends React.Component {
     componentDidMount() {
@@ -42,35 +43,77 @@ class WidgetListComponent extends React.Component {
         return (
             <div>
                 <h2>Widget List</h2>
-                {this.props.widgets &&
-                this.props.widgets.map(widget =>
-                    <div key={widget.id}>
-                        <Widget
-                            save={this.save}
-                            editing={this.state.editing}
-                            deleteWidget={this.props.deleteWidget}
-                            widget={widget}/>
+                <div class={'row'} style={{'margin-bottom':'10px'}}>
+                    <span>
+                        <button type={'button'} className={'btn btn-success'}>Save</button>
+                    </span>
+                    <span style={{'margin-right':'10px','margin-left':'10px','margin-top':'8px'}}> Preview </span>
+                    <span style={{'margin-top':'8px'}}>
+                        <i className="fas fa-eye-slash"></i>
+                    </span>
+                </div>
 
-                        {widget !== this.state.widget &&
-                        <button onClick={() =>
-                            this.setState({
-                                editing:true,
-                                widget: widget
-                            })}>
-                            ...
-                        </button>
-                        }
-                    </div>
-                )
-                }
-                <button onClick={() =>
-                    this.props.createWidget(this.props.topicId)}>
-                    +
-                </button>
-                <button onClick={() =>
-                    this.save()}>
-                    preview/ edit
-                </button>
+
+                {/*<div>*/}
+                {/*    {*/}
+                {/*        this.props.widget.type === "HEADING" &&*/}
+                {/*        <HeadingWidget*/}
+                {/*            editing={this.props.editing}*/}
+                {/*            widget={this.props.widget}/>*/}
+                {/*    }*/}
+                {/*    {*/}
+                {/*        this.props.widget.type === "PARAGRAPH" &&*/}
+                {/*        <ParagraphWidget*/}
+                {/*            editing={this.props.editing}*/}
+                {/*            widget={this.props.widget}/>*/}
+                {/*    }*/}
+                {/*    {   this.props.editing &&*/}
+                {/*    <span>*/}
+                {/*        <button onClick={() =>*/}
+                {/*            this.props.deleteWidget(this.props.widget.id)}>*/}
+                {/*            X*/}
+                {/*        </button>*/}
+                {/*        <button onClick={() =>{*/}
+                {/*            updateWidget(this.props.widget.id,this.props.widget);*/}
+                {/*            this.props.save()*/}
+                {/*        }}>*/}
+                {/*            Save*/}
+                {/*        </button>*/}
+                {/*    </span>*/}
+                {/*    }*/}
+                {/*</div>*/}
+
+                {/*<div>*/}
+                {/*    {this.props.widgets &&*/}
+                {/*    this.props.widgets.map(widget =>*/}
+                {/*        <div key={widget.id}>*/}
+                {/*            <Widget*/}
+                {/*                save={this.save}*/}
+                {/*                editing={this.state.editing}*/}
+                {/*                deleteWidget={this.props.deleteWidget}*/}
+                {/*                widget={widget}/>*/}
+
+                {/*            {widget !== this.state.widget &&*/}
+                {/*            <button onClick={() =>*/}
+                {/*                this.setState({*/}
+                {/*                    editing:true,*/}
+                {/*                    widget: widget*/}
+                {/*                })}>*/}
+                {/*                ...*/}
+                {/*            </button>*/}
+                {/*            }*/}
+                {/*        </div>*/}
+                {/*    )*/}
+                {/*    }*/}
+                {/*    <button onClick={() =>*/}
+                {/*        this.props.createWidget(this.props.topicId)}>*/}
+                {/*        +*/}
+                {/*    </button>*/}
+                {/*    <button onClick={() =>*/}
+                {/*        this.save()}>*/}
+                {/*        preview/ edit*/}
+                {/*    </button>*/}
+                {/*</div>*/}
             </div>
         )
     }
