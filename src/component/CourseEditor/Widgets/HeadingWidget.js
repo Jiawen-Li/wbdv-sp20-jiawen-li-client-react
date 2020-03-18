@@ -66,12 +66,6 @@ class HeadingWidget extends React.Component {
 
         </>
 
-    preview = () =>
-        <div>
-            <h1>Preview</h1>
-            {this.heading(this.props.widget)}
-        </div>
-
     heading = (widget) => {
         switch (widget.size) {
             case "Heading 1":
@@ -88,9 +82,14 @@ class HeadingWidget extends React.Component {
                 return <h6>{widget.value}</h6>
             default:
                 return <h1>{widget.value}</h1>
-
         }
     }
+
+    preview = () =>
+        <div>
+            <h1>Preview</h1>
+            {this.heading(this.props.widget)}
+        </div>
 
     render() {
         return (
@@ -98,8 +97,7 @@ class HeadingWidget extends React.Component {
                 {this.editingView()}
                 {!this.props.editing && this.preview()}
             </li>
-        )
-            ;
+        );
     }
 }
 
