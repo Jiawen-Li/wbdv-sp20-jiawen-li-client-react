@@ -5,35 +5,34 @@ import {connect} from "react-redux";
 class ParagraphWidget extends React.Component {
     render() {
         return (
-            <ul className={'list-group'}>
-                <li className={'list-group-item'}>
-                    <span><h4>Paragraph Widget</h4></span>
-                    <div className={'row'}>
-                        <button><i className="fas fa-arrow-up"></i></button>
-                        <button><i className="fas fa-arrow-down"></i></button>
-                        <select value={'Paragraph'}>
-                            <option>Heading</option>
-                            <option>Paragraph</option>
-                            <option>List</option>
-                            <option>Image</option>
-                        </select>
-                        <button><i className="fas fa-times"></i></button>
-                    </div>
-                    <textarea className={'row'}
-                              style={{'margin-bottom': '10px', 'margin-top': '10px'}}
-                              value={'Lorem ipsum'}>
+            <li className={'list-group-item'}>
+                <span><h4>Paragraph Widget</h4></span>
+                <div className={'row'}>
+                    <button><i className="fas fa-arrow-up"></i></button>
+                    <button><i className="fas fa-arrow-down"></i></button>
+                    <select value={'Paragraph'}>
+                        <option>Heading</option>
+                        <option>Paragraph</option>
+                        <option>List</option>
+                        <option>Image</option>
+                    </select>
+                    <button><i className="fas fa-times"></i></button>
+                </div>
+                <textarea className={'row'}
+                          style={{'margin-bottom': '10px', 'margin-top': '10px'}}
+                          value={'Lorem ipsum'}>
                     </textarea>
-                    <div className={'row'} style={{'margin-bottom': '10px'}}>
-                        <input value={'Widget name'} style={{'width': '600px'}}/>
-                    </div>
-                    <div className={'row'} style={{'margin-bottom': '10px'}}>
-                        <h4>Preview</h4>
-                    </div>
-                    <div className={'row'} style={{'margin-bottom': '10px'}}>
-                        <h3>Lorem ipsum</h3>
-                    </div>
-                </li>
-            </ul>
+                <div className={'row'} style={{'margin-bottom': '10px'}}>
+                    <input value={'Widget name'} style={{'width': '600px'}}/>
+                </div>
+                <div className={'row'} style={{'margin-bottom': '10px'}}>
+                    <h4>Preview</h4>
+                </div>
+                <div className={'row'} style={{'margin-bottom': '10px'}}>
+                    <h3>Lorem ipsum</h3>
+                </div>
+            </li>
+
             // <div>
             //     {
             //         this.props.editing &&

@@ -43,7 +43,7 @@ class WidgetListComponent extends React.Component {
         return (
             <div>
                 <h2>Widget List</h2>
-                <div class={'row'} style={{'margin-bottom':'10px'}}>
+                <div className={'row'} style={{'margin-bottom':'10px'}}>
                     <span>
                         <button type={'button'} className={'btn btn-success'}>Save</button>
                     </span>
@@ -52,6 +52,9 @@ class WidgetListComponent extends React.Component {
                         <i className="fas fa-eye-slash"></i>
                     </span>
                 </div>
+                <ul className={'list-group'}>
+
+                </ul>
 
 
                 {/*<div>*/}
