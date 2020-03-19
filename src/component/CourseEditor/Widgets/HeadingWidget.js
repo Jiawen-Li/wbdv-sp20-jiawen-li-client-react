@@ -57,7 +57,7 @@ class HeadingWidget extends React.Component {
 
             <div className={'row'} style={{'margin-bottom': '10px'}}>
                 <input placeholder={'Widget name'} value={this.props.widget.name} onChange={event =>
-                    this.props.updateWidget(this.widget.id, {
+                    this.props.updateWidget(this.props.widget.id, {
                         ...this.props.widget,
                         name: event.target.value
                     })

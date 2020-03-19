@@ -43,7 +43,7 @@ class ParagraphWidget extends React.Component {
             <div className={'row'} style={{'margin-bottom': '10px'}}>
                 <input placeholder={'Widget name'} style={{'width': '600px'}}
                        value={this.props.widget.name}
-                       onChange={event => this.props.updateWidget(this.widget.id,{
+                       onChange={event => this.props.updateWidget(this.props.widget.id,{
                            ...this.props.widget,
                            name: event.target.value
                            }
