@@ -1,4 +1,4 @@
-import React, {AllHTMLAttributes as widget} from "react";
+import React from "react";
 import {updateWidget} from "../../../actions/widgetActions";
 import {connect} from "react-redux";
 

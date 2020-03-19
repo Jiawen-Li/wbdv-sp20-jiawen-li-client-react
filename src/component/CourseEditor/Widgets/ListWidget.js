@@ -1,7 +1,6 @@
 import React from "react";
 import {updateWidget} from "../../../actions/widgetActions";
 import {connect} from "react-redux";
-import widgetReducer from "../../../reducers/WidgetReducer";
 
 class ListWidget extends React.Component {
 
@@ -63,26 +62,23 @@ class ListWidget extends React.Component {
 
         </>
 
+
     orderingList = () => {
         switch (this.props.widget.order) {
             case 0:
-                return (
-                    <ul>
-                        {this.props.widget.value.split("\n").map((row) =>
-                            <li>{row}</li>)}
-                    </ul>
-                );
+                return <ul>
+                    {this.props.widget.value.split("\n").map(row =>
+                        <li>{row}</li>)}
+                </ul>;
             case 1:
-                return (
-                    <ol>
-                        {this.props.widget.value.split("\n").map((row)=>
-                            <li>{row}</li>)}
-                    </ol>
-                );
+                return <ol>
+                    {this.props.widget.value.split("\n").map(row =>
+                        <li>{row}</li>)}
+                </ol>;
             default:
-                return <h3>{this.props.widget.value}<h3>
+                return <h3>{this.props.widget.value}</h3>;
         }
-    }
+    };
 
 
     preview = () =>
@@ -105,10 +101,8 @@ const dispatchToPropertyMapper = (dispatch) => ({
     updateWidget: (wid, newWidget) => dispatch(updateWidget(wid, newWidget))
 })
 
-
 export default connect(
     null,
     dispatchToPropertyMapper)
 (ListWidget)
-default:
-break;
+
