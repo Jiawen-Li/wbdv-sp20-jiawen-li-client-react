@@ -2,11 +2,9 @@ import React from "react";
 import {connect} from "react-redux";
 import HeadingWidget from "./Widgets/HeadingWidget";
 import ParagraphWidget from "./Widgets/ParagraphWidget";
-import {FIND_ALL_WIDGETS_FOR_TOPIC} from "../../actions/widgetActions";
+import * as widgetActions from "../../actions/widgetActions";
 import {WIDGET_SERVICE_URL} from "../../constants";
 import * as widgetService from "../../services/WidgetService";
-import * as widgetAction from '../../actions/widgetActions'
-import {updateWidget} from "../../services/WidgetService";
 import ListWidget from "./Widgets/ListWidget";
 import ImageWidget from "./Widgets/ImageWidget";
 
@@ -103,32 +101,50 @@ class WidgetListComponent extends React.Component {
     }
 }
 
-const dispatchToPropertyMapper = (dispatch) => ({
-    createWidget: (tid) =>
-       widgetService.createWidget(tid)
-            .then(actualWidget => dispatch(widgetAction.createWidget(actualWidget))),
+const stateToPropertyMapper = (state) => {
+    return {
+        ifWidgetEditingIndex: state.widgets.ifWidgetEditingIndex,
+        widgets: state.widgets.widgets,
+        widgetEditingContent: state.widgets.widgetEditingContent
+    }
+}
 
-    deleteWidget: (wid) =>
-        widgetService.deleteWidget(wid)
-            .then(status => dispatch(widgetAction.deleteWidget(wid))),
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
 
-    findWidgetsForTopic: (tid) =>
-        widgetService.findWidgetsForTopic(tid)
-            .then(widgets => dispatch(widgetAction.findWidgetForTopic(widgets))
-            ),
+        findWidgetForTopic: (topicId) =>
+            widgetService.findWidgetsForTopic(topicId)
+                .then(actualWidgets => dispatch(widgetActions.findWidgetForTopic(actualWidgets))),
 
-    // findAllWidgets: () =>
-    //     fetch('${WIDGET_SERVICE_URL}/api/widgets')
-    //         .then(response => response.json())
-    //         .then(widgets => dispatch({
-    //             type: "FIND_ALL_WIDGETS",
-    //             widgets: widgets
-    //         }))
-})
+        deleteWidget: (widgetId) =>
+            widgetService.deleteWidget(widgetId)
+                .then(status =>
+                    dispatch(widgetActions.deleteWidget(widgetId))),
 
-const stateToPropertyMapper = (state) => ({
-    widgets: state.widgets.widgets
-})
+        createWidget: (widgetId) => {
+            widgetService.createWidget(widgetId).then(
+                widget => dispatch(widgetActions.createWidget(widget))
+            )
+        },
+
+        editWidget: (index, content) => {
+            dispatch(widgetActions.changeWidgetEditingStatus(index, content))
+        },
+
+        saveWidget: (widgetId, widget) => {
+            widgetService.updateWidget(widgetId, widget).then(
+                r => {
+                    dispatch(widgetActions.updateWidget(widgetId, widget));
+                    dispatch(widgetActions.saveWidget())
+                }
+            )
+        },
+
+        changeWidget: (content) => {
+            dispatch(widgetActions.changeWidgetEditingContent(content))
+        }
+    }
+}
 
 export default connect(
     stateToPropertyMapper,

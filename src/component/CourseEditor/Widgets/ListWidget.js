@@ -28,7 +28,7 @@ class ListWidget extends React.Component {
                     <option value={'IMAGE'}>Image</option>
                 </select>
 
-                <button onChange={event => this.props.deleteWidget(this.props.widget.id)}>
+                <button onClick={event => this.props.deleteWidget(this.props.widget.id)}>
                     <i className="fas fa-times"></i>
                 </button>
 
