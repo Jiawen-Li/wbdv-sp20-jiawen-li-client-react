@@ -1,6 +1,8 @@
 import React from "react";
 import {connect} from "react-redux";
-import {updateWidget} from "../../../actions/widgetActions";
+import * as widgetService from "../../../services/WidgetService";
+import * as widgetActions from "../../../actions/widgetActions";
+
 
 class HeadingWidget extends React.Component {
 
@@ -101,12 +103,52 @@ class HeadingWidget extends React.Component {
     }
 }
 
-const dispatchToPropertyMapper = (dispatch) => ({
-    updateWidget: (wid, newWidget) => dispatch(updateWidget(wid, newWidget))
-})
+const stateToPropertyMapper = (state) => {
+    return {
+        ifWidgetEditingIndex: state.widgets.ifWidgetEditingIndex,
+        widgets: state.widgets.widgets,
+        widgetEditingContent: state.widgets.widgetEditingContent
+    }
+}
 
+const dispatchToPropertyMapper = (dispatch) => {
+    return {
+
+        findWidgetForTopic: (topicId) =>
+            widgetService.findWidgetsForTopic(topicId)
+                .then(actualWidgets => dispatch(widgetActions.findWidgetForTopic(actualWidgets))),
+
+        deleteWidget: (widgetId) =>
+            widgetService.deleteWidget(widgetId)
+                .then(status =>
+                    dispatch(widgetActions.deleteWidget(widgetId))),
+
+        createWidget: (widgetId) => {
+            widgetService.createWidget(widgetId).then(
+                widget => dispatch(widgetActions.createWidget(widget))
+            )
+        },
+
+        editWidget: (index, content) => {
+            dispatch(widgetActions.changeWidgetEditingStatus(index, content))
+        },
+
+        saveWidget: (widgetId, widget) => {
+            widgetService.updateWidget(widgetId, widget).then(
+                r => {
+                    dispatch(widgetActions.updateWidget(widgetId, widget));
+                    dispatch(widgetActions.saveWidget())
+                }
+            )
+        },
+
+        changeWidget: (content) => {
+            dispatch(widgetActions.changeWidgetEditingContent(content))
+        }
+    }
+}
 
 export default connect(
-    null,
+    stateToPropertyMapper,
     dispatchToPropertyMapper)
 (HeadingWidget)

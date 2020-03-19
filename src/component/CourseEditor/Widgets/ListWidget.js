@@ -101,7 +101,7 @@ class ListWidget extends React.Component {
             </li>
         )
     }
-}
+};
 
 const stateToPropertyMapper = (state) => {
     return {
@@ -151,5 +151,5 @@ const dispatchToPropertyMapper = (dispatch) => {
 export default connect(
     stateToPropertyMapper,
     dispatchToPropertyMapper)
-(WidgetListComponent)
+(ListWidget)
 
