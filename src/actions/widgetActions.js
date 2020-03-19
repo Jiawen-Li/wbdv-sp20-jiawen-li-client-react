@@ -23,40 +23,40 @@ export const findWidgetForTopic = (widgets) => ({
     widgets: widgets
 });
 
-// export const CHANGE_TOPIC_EDITING_STATUS = "CHANGE_TOPIC_EDITING_STATUS";
-// export const changeTopicEditingStatus = (index, editContent) => ({
-//     type: CHANGE_TOPIC_EDITING_STATUS,
-//     index: index,
-//     editContent: editContent
-// });
+export const CHANGE_WIDGET_EDITING_STATUS = "CHANGE_WIDGET_EDITING_STATUS";
+export const changeWidgetEditingStatus = (index, editContent) => ({
+    type: CHANGE_WIDGET_EDITING_STATUS,
+    index: index,
+    editContent: editContent
+});
+
+export const CHANGE_WIDGET_EDITING_CONTENT = "CHANGE_WIDGET_EDITING_CONTENT";
+export const changeWidgetEditingContent = (content) => ({
+    type: CHANGE_WIDGET_EDITING_CONTENT,
+    content: content
+});
+
+// export const WIDGET_POSITION_UP = "WIDGET_POSITION_UP";
+// export const widgetPositionUp = () => ({
+//     type: WIDGET_POSITION_UP
+// })
 //
-// export const CHANGE_TOPIC_EDITING_CONTENT = "CHANGE_TOPIC_EDITING_CONTENT";
-// export const changeTopicEditingContent = (content) => ({
-//     type: CHANGE_TOPIC_EDITING_CONTENT,
-//     content: content
-// });
+// export const WIDGET_POSITION_DOWN = "WIDGET_POSITION_DOWN";
+// export const widgetPositionDown = () => ({
+//     type: WIDGET_POSITION_DOWN
+// })
+//
+// export const PREVIEW_ON = "PREVIEW_ON";
+// export const previewOn = () => ({
+//     type: PREVIEW_ON
+// })
+//
+// export const PREVIEW_OFF = "PREVIEW_OFF";
+// export const previewOff = () => ({
+//     type: PREVIEW_OFF
+// })
 
-export const WIDGET_POSITION_UP = "WIDGET_POSITION_UP";
-export const widgetPositionUp = () => ({
-    type: WIDGET_POSITION_UP
-})
-
-export const WIDGET_POSITION_DOWN = "WIDGET_POSITION_DOWN";
-export const widgetPositionDown = () => ({
-    type: WIDGET_POSITION_DOWN
-})
-
-export const PREVIEW_ON = "PREVIEW_ON";
-export const previewOn = () => ({
-    type: PREVIEW_ON
-})
-
-export const PREVIEW_OFF = "PREVIEW_OFF";
-export const previewOff = () => ({
-    type: PREVIEW_OFF
-})
-
-export const SAVE_TOPIC = "SAVE_TOPIC";
-export const saveTopic=()=>({
-    type: SAVE_TOPIC
+export const SAVE_WIDGET = "SAVE_WIDGET";
+export const saveWidget=()=>({
+    type: SAVE_WIDGET
 })
