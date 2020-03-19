@@ -1,8 +1,9 @@
 import React from "react";
-import {updateWidget} from "../../../actions/widgetActions";
 import {connect} from "react-redux";
-import * as topicService from "../../../services/TopicService";
-import * as topicActions from "../../../actions/topicActions";
+import * as widgetService from "../../../services/WidgetService";
+import * as widgetActions from "../../../actions/widgetActions";
+import {Link} from "react-router-dom";
+import WidgetListComponent from "../WidgetListComponent";
 
 class ListWidget extends React.Component {
 
@@ -102,45 +103,53 @@ class ListWidget extends React.Component {
     }
 }
 
-const dispatchToPropertyMapper = (dispatch) => ({
-    // updateWidget: (wid, newWidget) => dispatch(updateWidget(wid, newWidget))
+const stateToPropertyMapper = (state) => {
+    return {
+        ifWidgetEditingIndex: state.widgets.ifWidgetEditingIndex,
+        widgets: state.widgets.widgets,
+        widgetEditingContent: state.widgets.widgetEditingContent
+    }
+}
+
+const dispatchToPropertyMapper = (dispatch) => {
     return {
 
-        findTopicForLesson: (lessonId) =>
-            topicService.findTopicsForLesson(lessonId)
-                .then(actualTopics => dispatch(topicActions.findTopicForLesson(actualTopics))),
+        findWidgetForTopic: (topicId) =>
+            widgetService.findWidgetsForTopic(topicId)
+                .then(actualWidgets => dispatch(widgetActions.findWidgetForTopic(actualWidgets))),
 
-        deleteTopic: (topicId) =>
-            topicService.deleteTopic(topicId)
+        deleteWidget: (widgetId) =>
+            widgetService.deleteWidget(widgetId)
                 .then(status =>
-                    dispatch(topicActions.deleteTopic(topicId))),
+                    dispatch(widgetActions.deleteWidget(widgetId))),
 
-        createTopic: (topicId) => {
-            topicService.createTopic(topicId).then(
-                topic => dispatch(topicActions.createTopic(topic))
+        createWidget: (widgetId) => {
+            widgetService.createWidget(widgetId).then(
+                widget => dispatch(widgetActions.createWidget(widget))
             )
         },
 
-        editTopic: (index, content) => {
-            dispatch(topicActions.changeTopicEditingStatus(index, content))
+        editWidget: (index, content) => {
+            dispatch(widgetActions.changeWidgetEditingStatus(index, content))
         },
 
-        saveTopic: (topicId, topic) => {
-            topicService.updateTopic(topicId, topic).then(
+        saveWidget: (widgetId, widget) => {
+            widgetService.updateWidget(widgetId, widget).then(
                 r => {
-                    dispatch(topicActions.updateTopic(topicId, topic));
-                    dispatch(topicActions.saveTopic())
+                    dispatch(widgetActions.updateWidget(widgetId, widget));
+                    dispatch(widgetActions.saveWidget())
                 }
             )
         },
 
-        changeTopic: (content) => {
-            dispatch(topicActions.changeTopicEditingContent(content))
+        changeWidget: (content) => {
+            dispatch(widgetActions.changeWidgetEditingContent(content))
         }
-    }})
+    }
+}
 
 export default connect(
-    null,
+    stateToPropertyMapper,
     dispatchToPropertyMapper)
-(ListWidget)
+(WidgetListComponent)
 
