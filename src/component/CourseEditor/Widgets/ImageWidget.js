@@ -33,6 +33,7 @@ class ImageWidget extends React.Component {
 
             <div className={'row'} style={{'margin-bottom': '10px', 'margin-top': '10px'}}>
                 <input value={this.props.widget.url} style={{'width': '600px'}}
+                       placeholder={'Please input pic url here.'}
                        onChange={event => this.props.updateWidget(this.props.widget.id, {
                            ...this.props.widget,
                            url: event.target.value
@@ -45,7 +46,7 @@ class ImageWidget extends React.Component {
                        onChange={event =>
                            this.props.updateWidget(this.props.widget.id, {
                                ...this.props.widget,
-                               name: event.target.name
+                               name: event.target.value
                            })}/>
             </div>
         </>
