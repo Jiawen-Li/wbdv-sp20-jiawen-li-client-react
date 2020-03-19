@@ -52,7 +52,7 @@ class ImageWidget extends React.Component {
     preview = () =>
         <div>
             <h1>Preview</h1>
-            {this.props.widget.url}
+            <img src={this.props.widget.url} alt={"pic"}/>
         </div>
 
     render() {
