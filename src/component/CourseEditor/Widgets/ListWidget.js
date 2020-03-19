@@ -55,7 +55,7 @@ class ListWidget extends React.Component {
 
             <div className={'row'} style={{'margin-bottom': '10px'}}>
                 <input placeholder={'Widget name'} style={{'width': '600px'}}
-                       onChange={event =>this.props.updateWidget(this.props.widget.id, {
+                       onChange={event => this.props.updateWidget(this.props.widget.id, {
                            ...this.props.widget,
                            name: event.target.value
                        })}/>
@@ -63,26 +63,32 @@ class ListWidget extends React.Component {
 
         </>
 
-    orderingSwitch = (widget)=>{
-            switch (widget.order) {
-                case 0:
-                    return (
-                        <ul>
-                            {this.props.widget.value.split("/n").map(row,index)}
-                        </ul>
-                    )
-                case 1:
-                    return <ol>{row}</ol>
-
-            }
+    orderingList = () => {
+        switch (this.props.widget.order) {
+            case 0:
+                return (
+                    <ul>
+                        {this.props.widget.value.split("\n").map((row) =>
+                            <li>{row}</li>)}
+                    </ul>
+                );
+            case 1:
+                return (
+                    <ol>
+                        {this.props.widget.value.split("\n").map((row)=>
+                            <li>{row}</li>)}
+                    </ol>
+                );
+            default:
+                return <h3>{this.props.widget.value}<h3>
+        }
     }
+
 
     preview = () =>
         <div>
             <h1>Preview</h1>
-            {this.props.widget.value.split("/n").map(
-                row => <li>{row}</li>
-            )}
+            {this.orderingList(this.props.widget.value)}
         </div>
 
     render() {
@@ -104,3 +110,5 @@ export default connect(
     null,
     dispatchToPropertyMapper)
 (ListWidget)
+default:
+break;
