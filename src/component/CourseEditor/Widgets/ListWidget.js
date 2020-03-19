@@ -76,7 +76,10 @@ class ListWidget extends React.Component {
                         <li>{row}</li>)}
                 </ol>;
             default:
-                return <h3>{this.props.widget.value}</h3>;
+                return <ul>
+                    {this.props.widget.value.split("\n").map(row =>
+                        <li>{row}</li>)}
+                </ul>;
         }
     };
 
