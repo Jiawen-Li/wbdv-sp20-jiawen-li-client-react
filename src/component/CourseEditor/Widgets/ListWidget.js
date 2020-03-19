@@ -1,6 +1,7 @@
 import React from "react";
 import {updateWidget} from "../../../actions/widgetActions";
 import {connect} from "react-redux";
+import widgetReducer from "../../../reducers/WidgetReducer";
 
 class ListWidget extends React.Component {
 
@@ -42,13 +43,13 @@ class ListWidget extends React.Component {
                     </textarea>
 
             <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <select value={this.props.widget.size} style={{'width': '600px'}}
+                <select value={this.props.widget.order} style={{'width': '600px'}}
                         onChange={event => this.props.updateWidget(this.props.widget.id, {
                             ...this.props.widget,
-                            size: event.target.value
+                            order: event.target.value
                         })}>
-                    <option value={1}>Unordered list</option>
-                    <option value={2}>Ordered list</option>
+                    <option value={0}>Unordered list</option>
+                    <option value={1}>Ordered list</option>
                 </select>
             </div>
 
@@ -62,11 +63,25 @@ class ListWidget extends React.Component {
 
         </>
 
+    orderingSwitch = (widget)=>{
+            switch (widget.order) {
+                case 0:
+                    return (
+                        <ul>
+                            {this.props.widget.value.split("/n").map(row,index)}
+                        </ul>
+                    )
+                case 1:
+                    return <ol>{row}</ol>
+
+            }
+    }
+
     preview = () =>
         <div>
             <h1>Preview</h1>
             {this.props.widget.value.split("/n").map(
-                row => <h3>{row}</h3>
+                row => <li>{row}</li>
             )}
         </div>
 
