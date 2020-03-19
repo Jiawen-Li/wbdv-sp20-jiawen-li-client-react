@@ -39,7 +39,7 @@ class WidgetListComponent extends React.Component {
         switch (widget.type) {
             case "HEADING":
                 return <HeadingWidget
-                    editing={this.stats.editing}
+                    editing={this.state.editing}
                     widget={widget}/>
             case "PARAGRAPH":
                 return <ParagraphWidget

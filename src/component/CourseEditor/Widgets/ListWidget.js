@@ -60,20 +60,12 @@ class ListWidget extends React.Component {
                        })}/>
             </div>
 
-            <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <h4>Preview</h4>
-            </div>
-
-            <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <h3>Put each item in a separate row.</h3>
-            </div>
-
         </>
 
     preview = () =>
         <div>
             <h1>Preview</h1>
-            {widget.value.split("/n").map(
+            {this.props.widget.value.split("/n").map(
                 row => <h3>{row}</h3>
             )}
         </div>

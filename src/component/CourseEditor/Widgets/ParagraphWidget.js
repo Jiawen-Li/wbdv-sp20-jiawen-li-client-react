@@ -55,7 +55,7 @@ class ParagraphWidget extends React.Component {
     preview = () =>
         <div>
             <h1>Preview</h1>
-            <h3>{widget.value}</h3>
+            <h3>{this.props.widget.value}</h3>
         </div>
 
     render() {
