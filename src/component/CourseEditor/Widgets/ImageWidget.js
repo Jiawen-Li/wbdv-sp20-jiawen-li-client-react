@@ -16,7 +16,7 @@ class ImageWidget extends React.Component {
 
                 <select value={this.props.widget.type}
                         placeholder={'IMAGE'}
-                        onChange={event => this.props.update(this.props.widget.id, {
+                        onChange={event => this.props.updateWidget(this.props.widget.id, {
                             ...this.props.widget,
                             type: event.target.value
                         })}>
