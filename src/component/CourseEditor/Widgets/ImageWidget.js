@@ -47,14 +47,6 @@ class ImageWidget extends React.Component {
                                name: event.target.name
                            })}/>
             </div>
-
-            <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <h4>Preview</h4>
-            </div>
-
-            <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <h3>should be picture.</h3>
-            </div>
         </>
 
     preview = () =>
