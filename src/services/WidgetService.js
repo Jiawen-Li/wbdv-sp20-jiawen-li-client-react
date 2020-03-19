@@ -1,7 +1,7 @@
 import {WIDGET_SERVICE_URL} from "../constants";
 
-export const createWidget = (tid) =>
-    fetch(`${WIDGET_SERVICE_URL}/api/topics/${tid}/widgets`, {
+export const createWidget = (topicId) =>
+    fetch(`${WIDGET_SERVICE_URL}/api/topics/${topicId}/widgets`, {
         method: "POST",
         body: JSON.stringify({
             name: "New Widget"
@@ -11,21 +11,27 @@ export const createWidget = (tid) =>
         }
     }).then(response => response.json());
 
-export const deleteWidget = (wid) =>
-    fetch(`${WIDGET_SERVICE_URL}/api/widgets/${wid}`, {
-        method: "DELETE"
-    }).then(response => response.json());
+export const findWidgetsForTopic = (topicId) =>
+    fetch(`${WIDGET_SERVICE_URL}/api/topics/${topicId}/widgets`)
+        .then(response => response.json())
 
-export const updateWidget = (wid, widget) =>
-    fetch(`${WIDGET_SERVICE_URL}/api/widgets/${wid}`, {
+export const deleteWidget = (widgetId) =>
+    fetch(`${WIDGET_SERVICE_URL}/api/widgets/${widgetId}`, {
+        method: "DELETE"
+    });
+
+export const updateWidget = (widgetId, widget) =>
+    fetch(`${WIDGET_SERVICE_URL}/api/widgets/${widgetId}`, {
         method: "PUT",
         body: JSON.stringify(widget),
         headers: {
             "content-type": "application/json"
         }
-    });
+    }).then(response => response.json());
 
-export const findWidgetsForTopic = (tid) =>
-    fetch(`${WIDGET_SERVICE_URL}/api/topics/${tid}/widgets`)
-        .then(response => response.json())
-;
+export default {
+    createWidget,
+    deleteWidget,
+    findWidgetsForTopic,
+    updateWidget,
+}

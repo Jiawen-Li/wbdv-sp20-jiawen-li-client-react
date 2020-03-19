@@ -1,6 +1,8 @@
 import React from "react";
 import {updateWidget} from "../../../actions/widgetActions";
 import {connect} from "react-redux";
+import * as topicService from "../../../services/TopicService";
+import * as topicActions from "../../../actions/topicActions";
 
 class ListWidget extends React.Component {
 
@@ -101,8 +103,41 @@ class ListWidget extends React.Component {
 }
 
 const dispatchToPropertyMapper = (dispatch) => ({
-    updateWidget: (wid, newWidget) => dispatch(updateWidget(wid, newWidget))
-})
+    // updateWidget: (wid, newWidget) => dispatch(updateWidget(wid, newWidget))
+    return {
+
+        findTopicForLesson: (lessonId) =>
+            topicService.findTopicsForLesson(lessonId)
+                .then(actualTopics => dispatch(topicActions.findTopicForLesson(actualTopics))),
+
+        deleteTopic: (topicId) =>
+            topicService.deleteTopic(topicId)
+                .then(status =>
+                    dispatch(topicActions.deleteTopic(topicId))),
+
+        createTopic: (topicId) => {
+            topicService.createTopic(topicId).then(
+                topic => dispatch(topicActions.createTopic(topic))
+            )
+        },
+
+        editTopic: (index, content) => {
+            dispatch(topicActions.changeTopicEditingStatus(index, content))
+        },
+
+        saveTopic: (topicId, topic) => {
+            topicService.updateTopic(topicId, topic).then(
+                r => {
+                    dispatch(topicActions.updateTopic(topicId, topic));
+                    dispatch(topicActions.saveTopic())
+                }
+            )
+        },
+
+        changeTopic: (content) => {
+            dispatch(topicActions.changeTopicEditingContent(content))
+        }
+    }})
 
 export default connect(
     null,
