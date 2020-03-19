@@ -2,9 +2,11 @@ import React from "react";
 import {connect} from "react-redux";
 import HeadingWidget from "./Widgets/HeadingWidget";
 import ParagraphWidget from "./Widgets/ParagraphWidget";
-import * as widgetActions from "../../actions/widgetActions";
+import {FIND_ALL_WIDGETS_FOR_TOPIC} from "../../actions/widgetActions";
 import {WIDGET_SERVICE_URL} from "../../constants";
 import * as widgetService from "../../services/WidgetService";
+import * as widgetAction from '../../actions/widgetActions'
+import {updateWidget} from "../../services/WidgetService";
 import ListWidget from "./Widgets/ListWidget";
 import ImageWidget from "./Widgets/ImageWidget";
 
@@ -101,50 +103,24 @@ class WidgetListComponent extends React.Component {
     }
 }
 
-const stateToPropertyMapper = (state) => {
-    return {
-        ifWidgetEditingIndex: state.widgets.ifWidgetEditingIndex,
-        widgets: state.widgets.widgets,
-        widgetEditingContent: state.widgets.widgetEditingContent
-    }
-}
+const dispatchToPropertyMapper = (dispatch) => ({
+    createWidget: (tid) =>
+       widgetService.createWidget(tid)
+            .then(actualWidget => dispatch(widgetAction.createWidget(actualWidget))),
 
-const dispatchToPropertyMapper = (dispatch) => {
-    return {
+    deleteWidget: (wid) =>
+        widgetService.deleteWidget(wid)
+            .then(status => dispatch(widgetAction.deleteWidget(wid))),
 
-        findWidgetForTopic: (topicId) =>
-            widgetService.findWidgetsForTopic(topicId)
-                .then(actualWidgets => dispatch(widgetActions.findWidgetForTopic(actualWidgets))),
+    findWidgetsForTopic: (tid) =>
+        widgetService.findWidgetsForTopic(tid)
+            .then(widgets => dispatch(widgetAction.findWidgetForTopic(widgets))
+            ),
+})
 
-        deleteWidget: (widgetId) =>
-            widgetService.deleteWidget(widgetId)
-                .then(status =>
-                    dispatch(widgetActions.deleteWidget(widgetId))),
-
-        createWidget: (widgetId) => {
-            widgetService.createWidget(widgetId).then(
-                widget => dispatch(widgetActions.createWidget(widget))
-            )
-        },
-
-        editWidget: (index, content) => {
-            dispatch(widgetActions.changeWidgetEditingStatus(index, content))
-        },
-
-        saveWidget: (widgetId, widget) => {
-            widgetService.updateWidget(widgetId, widget).then(
-                r => {
-                    dispatch(widgetActions.updateWidget(widgetId, widget));
-                    dispatch(widgetActions.saveWidget())
-                }
-            )
-        },
-
-        changeWidget: (content) => {
-            dispatch(widgetActions.changeWidgetEditingContent(content))
-        }
-    }
-}
+const stateToPropertyMapper = (state) => ({
+    widgets: state.widgets.widgets
+})
 
 export default connect(
     stateToPropertyMapper,
