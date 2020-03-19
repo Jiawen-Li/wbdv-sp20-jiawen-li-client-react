@@ -146,11 +146,8 @@ const dispatchToPropertyMapper = (dispatch) => {
             dispatch(widgetActions.changeWidgetEditingContent(content))
         },
 
-        updateWidget: (widgetId,widget) => {
-            widgetService.updateWidget(widgetId,widget).then(
-                widget => dispatch(widgetActions.updateWidget(widgetId,widget))
-            )
-        },
+        updateWidget: (widgetId,widget) =>
+            dispatch(widgetActions.updateWidget(widgetId,widget))
     }
 }
 
