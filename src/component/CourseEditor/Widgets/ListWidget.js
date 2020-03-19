@@ -75,7 +75,6 @@ class ListWidget extends React.Component {
             <li className={'list-group-item'}>
                 {this.editingView()}
                 {!this.props.editing && this.preview()}
-
             </li>
         )
     }
