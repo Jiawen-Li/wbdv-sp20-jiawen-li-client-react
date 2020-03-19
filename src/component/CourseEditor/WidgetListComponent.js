@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 import HeadingWidget from "./Widgets/HeadingWidget";
 import ParagraphWidget from "./Widgets/ParagraphWidget";
-import Widget from "../CourseEditor/Widgets/WidgetList";
 import {FIND_ALL_WIDGETS_FOR_TOPIC} from "../../actions/widgetActions";
 import {WIDGET_SERVICE_URL} from "../../constants";
 import * as widgetService from "../../services/WidgetService";
