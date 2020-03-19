@@ -7,7 +7,7 @@ class ImageWidget extends React.Component {
 
     editingView = () =>
         <>
-            <span><h4>List Widget</h4></span>
+            <span><h4>{this.props.widget.name}</h4></span>
 
             <div className={'row'}>
 

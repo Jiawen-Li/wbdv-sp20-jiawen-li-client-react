@@ -8,7 +8,7 @@ class HeadingWidget extends React.Component {
 
     editingView = () =>
         <>
-            <span><h4>Heading Widget</h4></span>
+            <span><h4>{this.props.widget.name}</h4></span>
 
             <div className={'row'}>
 
@@ -45,7 +45,7 @@ class HeadingWidget extends React.Component {
                 <select placeholder={'Choose size'} value={this.props.widget.size}
                         onChange={event => this.props.updateWidget(this.props.widget.id,{
                             ...this.props.widget,
-                            size: event.target.value
+                            size: parseInt(event.target.value)
                         })}
                         style={{'width': '600px'}}>
                     <option value={1}>Heading 1</option>
@@ -70,17 +70,17 @@ class HeadingWidget extends React.Component {
 
     heading = (widget) => {
         switch (widget.size) {
-            case "Heading 1":
+            case 1:
                 return <h1>{widget.value}</h1>
-            case "Heading 2":
+            case 2:
                 return <h2>{widget.value}</h2>
-            case "Heading 3":
+            case 3:
                 return <h3>{widget.value}</h3>
-            case "Heading 4":
+            case 4:
                 return <h4>{widget.value}</h4>
-            case "Heading 5":
+            case 5:
                 return <h5>{widget.value}</h5>
-            case "Heading 6":
+            case 6:
                 return <h6>{widget.value}</h6>
             default:
                 return <h1>{widget.value}</h1>

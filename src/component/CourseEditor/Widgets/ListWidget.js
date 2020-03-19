@@ -9,7 +9,7 @@ class ListWidget extends React.Component {
 
     editingView = () =>
         <>
-            <span><h4>List Widget</h4></span>
+            <span><h4>{this.props.widget.name}</h4></span>
 
             <div className={'row'}>
 
@@ -48,7 +48,7 @@ class ListWidget extends React.Component {
                 <select value={this.props.widget.order} style={{'width': '600px'}}
                         onChange={event => this.props.updateWidget(this.props.widget.id, {
                             ...this.props.widget,
-                            order: event.target.value
+                            order: parseInt(event.target.value)
                         })}>
                     <option value={0}>Unordered list</option>
                     <option value={1}>Ordered list</option>
@@ -56,7 +56,7 @@ class ListWidget extends React.Component {
             </div>
 
             <div className={'row'} style={{'margin-bottom': '10px'}}>
-                <input placeholder={'Widget name'} style={{'width': '600px'}}
+                <input placeholder={'Widget name'} value={this.props.widget.name} style={{'width': '600px'}}
                        onChange={event => this.props.updateWidget(this.props.widget.id, {
                            ...this.props.widget,
                            name: event.target.value
